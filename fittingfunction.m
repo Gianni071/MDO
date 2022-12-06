@@ -2,7 +2,7 @@
 function[error] = fittingfunction(x)
 
 %Read .dat file
-txt = readmatrix('TipAirfoil.txt');
+txt = readmatrix('RootAirfoil.txt');
 
 %Read CST coefficients
 CSTup = x(1:length(x)/2);

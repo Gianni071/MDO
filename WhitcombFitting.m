@@ -69,7 +69,7 @@ CSTlow = x(length(x)/2+1:length(x));
 [Xtl,Xtu] = D_airfoil2(CSTup,CSTlow,Xairfoil);
 
 %extract coordinates of .txt airfoil
-txt = readmatrix('TipAirfoil.txt');
+txt = readmatrix('RootAirfoil.txt');
 k = length(txt)/2;
 %Reference airfoil coordinates
 Xcoords = txt(1:k,1);
@@ -88,4 +88,5 @@ plot(Xairfoil,Ylref,'rx')
 axis([0,1,-0.3,0.3]);
 
 %Write CST coeff as txt
-writematrix(x,"TipRefCST.txt")
+%writematrix(x,"TipRefCST.txt")
+writematrix(x,'RootRefCST.txt');
