@@ -89,4 +89,4 @@ axis([0,1,-0.3,0.3]);
 
 %Write CST coeff as txt
 %writematrix(x,"TipRefCST.txt")
-writematrix(x,'RootRefCST.txt');
+%writematrix(x,'RootRefCST.txt');
