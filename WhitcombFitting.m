@@ -15,9 +15,26 @@ for i= 1:lim;
 end
 end
 
-%Upper surface coords
-CoordUp = t(1:k,2);
+%Upper surface coords, upper surface is flipped so x/c: 0-1
+CoordUp = flip(t(1:k,2),1);
 CoordDown = t(k:length(t),2);
 
 %Difference between upper and lower coordinates
-Diff
+diff = CoordUp-CoordDown;
+%Max thickness (chord=1 so immediately (t/c)max)
+maxt = max(diff);
+
+%Scale factor for 14%:
+scalefactor14 = 0.14/maxt;
+%Scale factor for 8%:
+scalefactor8 = 0.08/maxt;
+
+%Root airfoil Y-coordinates
+YuRoot = CoordUp*scalefactor14;
+YlRoot = CoordDown*scalefactor14;
+
+%Tip airfoil Y-coordinates
+YuTip = CoordUp*scalefactor8;
+YlRoot = CoordDown*scalefactor8;
+
+
