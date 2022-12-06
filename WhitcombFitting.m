@@ -35,7 +35,7 @@ YlRoot = CoordDown*scalefactor14;
 
 %Tip airfoil Y-coordinates
 YuTip = CoordUp*scalefactor8;
-YlRoot = CoordDown*scalefactor8;
+YlTip = CoordDown*scalefactor8;
 
 %X-coords
 Xairfoil = t(k:length(t),1);
