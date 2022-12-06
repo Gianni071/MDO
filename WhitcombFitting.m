@@ -63,7 +63,3 @@ YlRoot = CoordDown*scalefactor8;
 
 %X-coords
 Xairfoil = t(k:length(t),1);
-
-
-
->>>>>>> d4e8dc6294cd534da3ee3005668aa6819e1803f3
