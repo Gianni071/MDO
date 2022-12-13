@@ -53,14 +53,12 @@ tiplowlimit = ubtip(7:12);
 Yutip = Xtutip(:,2)
 Yltip = Xtltip(:,2)
 
-
 %plot airfoil
 figure
 hold on
 plot(Xcoords,Yutip,'b')
 plot(Xcoords,Yltip,'r')
 axis([0,1,-0.3,0.3])
-
 
 lb = [lbroot;lbtip]
 ub = [ubroot;ubtip]

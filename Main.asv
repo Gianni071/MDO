@@ -16,9 +16,11 @@ data.y2 = 5.25; %[m]
 data.TEsw = 6.15; %[deg]
 data.dihedral = -5; %[deg]
 data.Sref = 77.3; %[m^2]
+data.front_spar = 0.2 %[-]
+data.rear_spar = 0.6 %[-]
 
 %Change this!
-data.WAW = 10000; %[kg] GUESS VALUE
+data.WAW = 9.81*10000; %[N] GUESS VALUE
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
 data.Vcr = 356; %[kts]
@@ -34,18 +36,9 @@ data.Ft_al       =    295E6;        %N/m2
 data.Fc_al       =    295E6;        %N/m2
 
 %EMWET Input Constants 
-data.section_num =    3;       %[number of sections]
-data.airfoil_num =    2;       %[number of airfoils]
-data.eng_mass    =    606;     %[kg]
-data.pitch_rib   =    0.5;     %[m]
-data.eff_factor  =    0.96;    %Depend on the stringer type
-data.front_spar  =    0.2      %[-]
-data.rear_spar   =    0.6      %[-]
-data.ftank_start =    0.1;     %[y/y3]
-data.ftank_end   =    0.85;    %[y/y3]
-data.eng_num     =    2;       %[-]
-data.eng_ypos1   =    0.315;   %[y/y3]
-data.eng_ypos2   =    0.50;    %[y/y3]
+data.section_num =    3;
+airfoil_num =    2;
+
 
 %% Initial Design Vector
 %Design Vector Entries:
@@ -55,9 +48,9 @@ data.eng_ypos2   =    0.50;    %[y/y3]
 %Get initial CST coefficients
 CSTroot = readmatrix('RootRefCST.txt');
 CSTtip = readmatrix('TipRefCST.txt');
-CST = [CSTroot; CSTtip];
+CST = [CSTroot;CSTtip];
 
-x0 = [CST; 3.94; 0.75; 0.475; 0; 0; 17.82; 26.21; 5000; 10023; 16];
+x0 = [CST;3.94;0.75;0.475;0;0;17.82;26.21;5000;10023;16];
 
 %% Bounds Vectors
 CSTlb = readmatrix('CSTLowerBound.txt');

@@ -15,7 +15,6 @@ N2 = 1;     %Class function N2
 zeta_u = 0.000;     %upper surface TE gap
 zeta_l = -0.000;     %lower surface TE gap
 
-
 nu = length(Au)-1;
 nl = length(Al)-1;
 
