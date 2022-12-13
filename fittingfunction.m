@@ -17,7 +17,6 @@ Yl = txt(k+1:length(txt),2);
 %Class function coordinates
 [Xtu,Xtl] = D_airfoil2(CSTup,CSTlow,Xcoords);
 
-
 errorup = sum((Xtu(:,2)-Yu).^2);
 errorlow = sum((Xtl(:,2)-Yl).^2);
 
