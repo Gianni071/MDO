@@ -9,7 +9,7 @@ global data
 y2 = data.y2; %[m]
 TEsw = data.TEsw; %[deg]
 dihedral = data.dihedral; %[deg]
-WAW = data.WAW; %[N] Guess value for now
+WAW = 9.81*data.WAW; %[N] Guess value for now
 V = data.Vcr*0.51444; %[m/s]
 rho = data.rho; %[kg/m^3]
 alt = data.hcr*0.3048; %[m]
@@ -88,5 +88,9 @@ AC.Aero.CL    = CL;          % lift coefficient - comment this line to run the c
 Res = Q3D_solver(AC);
 
 %Output CL and CD
+
 CL = Res.CLwing;
 CD = Res.CDwing;
+
+data.CL = CL;
+data.CD = CD;

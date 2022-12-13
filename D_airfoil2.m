@@ -34,7 +34,7 @@ for i = 1:length(x)
     Sl(i) = 0;  %Shape function initially zero
     for k = 0:nl        
         Krnl = factorial(nl)/(factorial(k)*factorial(nl-k));
-        Sl(i) = Sl(i) + Al(k+1)*Krnl*(1-x(i))^(nu-k)*x(i)^(k);
+        Sl(i) = Sl(i) + Al(k+1)*Krnl*(1-x(i))^(nl-k)*x(i)^(k);
     end
     
     %calculate upper and lower surface ordinates at x(i)

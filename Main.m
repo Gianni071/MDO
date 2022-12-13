@@ -6,7 +6,7 @@ clear all
 global data
 
 %Fuselage drag
-data.Dfus = 5100.3; %[N]
+data.Dfus = 11323.74; %[N]
 
 %Reference planform values
 data.x1 = 0 %[m]
@@ -21,6 +21,7 @@ data.rear_spar = 0.6 %[-]
 
 %Change this!
 data.WAW = 9.81*10000; %[N] GUESS VALUE
+data.WSref = 545.72; %[kg/m^2]
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
 data.Vcr = 356; %[kts]
