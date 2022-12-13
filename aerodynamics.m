@@ -64,7 +64,6 @@ AC.Wing.Geom = [0     0     0     c1         0;
 % Wing incidence angle (degree)
 AC.Wing.inc  = 0;   
             
-            
 % Airfoil coefficients input matrix
 %                    | ->     upper curve coeff.                <-|   | ->       lower curve coeff.       <-| 
 %AC.Wing.Airfoils   = [0.2171    0.3450    0.2975    0.2685    0.2893  -0.1299   -0.2388   -0.1635   -0.0476    0.0797;

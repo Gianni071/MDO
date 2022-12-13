@@ -9,10 +9,15 @@ global data
 data.Dfus = 5100.3; %[N]
 
 %Reference planform values
+data.x1 = 0 %[m]
+data.y1 = 0 %[m]
+data.z1 = 0 %[m]
 data.y2 = 5.25; %[m]
 data.TEsw = 6.15; %[deg]
 data.dihedral = -5; %[deg]
 data.Sref = 77.3; %[m^2]
+data.front_spar = 0.2 %[-]
+data.rear_spar = 0.6 %[-]
 
 %Change this!
 data.WAW = 9.81*10000; %[N] GUESS VALUE
