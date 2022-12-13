@@ -1,25 +1,27 @@
 function[CL,CD] = aerodynamics(x,vis)
 %% Get Inputs
-
+global data
 %Design Vector Entries:
 %x = [CST,c1,lambda1,lambda2,theta2,theta3,LEsw,b,Wwing,Wfuel,L/DcrAC]
 %x = [1-24,25, 26      27      28     29    30  31  32    33     34]
 
 %Constant variables (TAKE THIS FROM GLOBAL WHEN ACTUALLY RUNNING)
-y2 = 5.25; %[m]
-TEsw = 6.15; %[deg]
-dihedral = -5; %[deg]
-WAW = 9.81*10000; %[N] Guess value for now
-Vcr = 356; %[kts]
-hcr = 29000; %[ft]
-Sref = 77.3; %[m^2]
+y2 = data.y2; %[m]
+TEsw = data.TEsw; %[deg]
+dihedral = data.dihedral; %[deg]
+WAW = data.WAW; %[N] Guess value for now
+V = data.Vcr*0.51444; %[m/s]
+rho = data.rho; %[kg/m^3]
+alt = data.hcr*0.3048; %[m]
+a = data.a; %[m/s]
+dynvis = data.dynvis; %[Pa s]
 
 %Design Variables
 CST1 = x(1:12); %[-]
 CST2 = x(13:24); %[-]
 CST1= transpose(CST1);
 CST2 = transpose(CST2);
-CST = [CST1;CST2]
+CST = [CST1;CST2];
 c1 = x(25); %[m]
 lambda1 = x(26); %[-]
 lambda2 = x(27); %[-]
@@ -39,17 +41,17 @@ x3 = x2 + (y3-y2)*sind(LEsw);
 z2 = y2*sind(dihedral);
 z3 = y3*sind(dihedral);
 
+%Surface Area Wing
+S = 2*(y2*(c1+c2)/2+(y3-y2)*(c2+c3)/2);
+
 %Design Weight
 WTO = Wwing+WAW+Wfuel;
 Wdes = sqrt(WTO*(WTO-Wfuel));
 
-%Flight Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
-V = 0.51444*Vcr; %[m/s]
-rho = 0.475448; %[kg/m^3]
-alt = hcr*0.3048; %[m]
-Re = (3.17*rho*V)/0.0000151075;
-M = V/304.484;
-CL = Wdes/(0.5*rho*V^2*Sref);
+%Flight Conditions 
+Re = (3.17*rho*V)/dynvis;
+M = V/a;
+CL = Wdes/(0.5*rho*V^2*S);
 
 %% Aerodynamic solver setting
 
@@ -83,7 +85,9 @@ AC.Aero.M     = M;           % flight Mach number
 AC.Aero.CL    = CL;          % lift coefficient - comment this line to run the code for given alpha%
 %AC.Aero.Alpha = 2;             % angle of attack -  comment this line to run the code for given cl 
 
+%Run Q3D
 Res = Q3D_solver(AC);
 
+%Output CL and CD
 CL = Res.CLwing;
 CD = Res.CDwing;
