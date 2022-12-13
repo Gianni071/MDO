@@ -9,10 +9,15 @@ global data
 data.Dfus = 5100.3; %[N]
 
 %Reference planform values
+data.x1 = 0 %[m]
+data.y1 = 0 %[m]
+data.z1 = 0 %[m]
 data.y2 = 5.25; %[m]
 data.TEsw = 6.15; %[deg]
 data.dihedral = -5; %[deg]
 data.Sref = 77.3; %[m^2]
+data.front_spar = 0.2 %[-]
+data.rear_spar = 0.6 %[-]
 
 %Change this!
 data.WAW = 9.81*10000; %[N] GUESS VALUE
@@ -24,9 +29,7 @@ data.rho = 0.475448; %[kg/m^3]
 data.a = 304.484; %[m/s]
 data.dynvis = 0.0000151075; %[Pa s]
 
-%% Write EMWET init file
-
-
+%Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
 
 
 %% Initial Design Vector
