@@ -60,7 +60,7 @@ AC.Aero.rho   = 0.4663;         % air density  (kg/m3)
 AC.Aero.alt   = 8839.2;             % flight altitude (m)
 AC.Aero.Re    = AC.Aero.rho*AC.Aero.V*MAC/(0.00001504);        % reynolds number (bqased on mean aerodynamic chord)
 AC.Aero.M     = AC.Aero.V/a ;           % flight Mach number 
-n_max = 2.5
+n_max         = 2.5
 AC.Aero.CL    = (n_max*MTOW*9.81)/(0.5*AC.Aero.rho*AC.Aero.V^2*S)          % lift coefficient - comment this line to run the code for given alpha%
 %AC.Aero.Alpha = 2;             % angle of attack -  comment this line to run the code for given cl 
 
