@@ -1,7 +1,11 @@
 function[W_wing] = Structural(x, RJ85.init, RJ85.load)
 
-call on the init file which as been written before 
+EMWET('RJ85')
 
-run emwet with the init and loads file 
+filename = 'RJ85.weight';
+delimiterIn = ' ';
+headerlinesIn = 4;
+A = importdata(filename, delimiterIn, headerlinesIn);
+B = A.textdata{1, 1}(23:29)
 
-output will be weight of wing 
+W_wing = B
