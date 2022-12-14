@@ -14,16 +14,23 @@ to get my init file i have to do the code being written below
 
 cst parameters -> make txt file  
 
-CST_up_root    = x[1], x[2], x[3], x[4], x[5], x[6];
-CST_lower_root = x[7], x[8], x[9], x[10], x[11], x[12];
-CST_up_tip     = x[13], x[14], x[15], x[16], x[17], x[18];
-CST_lower_tip  = x[19], x[20], x[21], x[22], x[23], x[24];
+CST_root    = [x[1] x[2] x[3] x[4] x[5] x[6] x[7] x[8] x[9] x[10] x[11] x[12]];
+CST_tip     = [x[13] x[14] x[15] x[16] x[17] x[18] x[19] x[20] x[21] x[22] x[23] x[24]];
 
-[Xtu_root, Xtl_root] = D_airfoil2(CST_up_root, CST_lower_root, [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]');
-[Xtu_tip, Xtl_tip] = D_airfoil2(CST_up_tip, CST_lower_tip, [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]');
+RootUp = transpose(CST_root(1:6));
+RootLow = transpose(CST_root(7:12));
+TipUp = CST_tip(1:6);
+TipLow = CST_tip(7:12);
+
+xairfoil = transpose(linspace(0,1,101));
+
+[Xtu_root, Xtl_root] = D_airfoil2(RootUp, RootLow, xairfoil);
+[Xtu_tip, Xtl_tip] = D_airfoil2(TipUp, TipLow, xairfoil);
 
 fid = fopen('TipAirfoil.txt','wt');
-fprintf(fid, '%g %g \n', MTOW*9.81, MZF);
+fprintf(fid, '%f %f \n', Xtu_tip, Xtl_tip );
+fprintf(fid, '%f %f \n', Xtu_tip, Xtl_tip );
+
 
 
 %%%_Routine to write the input file for the EMWET procedure_%%%
