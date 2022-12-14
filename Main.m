@@ -19,6 +19,7 @@ data.Sref = 77.3; %[m^2]
 
 %Change this!
 data.WAW = 10000; %[kg] GUESS VALUE
+data.WSref = 545.72; %[kg/m^2]
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
 data.Vcr = 356; %[kts]
