@@ -11,8 +11,7 @@ Xcoords = t(1:length(t)/2,1);
 rootCST = readmatrix('RootRefCST.txt');
 
 %Calculate absolute 20% change
-absrootCST = abs(rootCST);
-abschange = 0.25*absrootCST;
+abschange = 0.25*rootCST;
 
 lbroot = rootCST - abschange;
 ubroot = rootCST + abschange;
@@ -24,8 +23,8 @@ rootlowlimit = ubroot(7:12);
 %Calculate coordinates of limit airfoil
 [Xturoot,Xtlroot] = D_airfoil2(rootuplimit,rootlowlimit,Xcoords);
 
-Yuroot = Xturoot(:,2)
-Ylroot = Xtlroot(:,2)
+Yuroot = Xturoot(:,2);
+Ylroot = Xtlroot(:,2);
 
 %plot airfoil
 figure
@@ -37,8 +36,7 @@ axis([0,1,-0.3,0.3])
 tipCST = readmatrix('TipRefCST.txt')
 
 %Calculate absolute 20% change
-abstipCST = abs(tipCST);
-abschangetip = 0.25*abstipCST;
+abschangetip = 0.25*tipCST;
 
 lbtip = tipCST - abschangetip;
 ubtip = tipCST + abschangetip;

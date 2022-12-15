@@ -13,12 +13,13 @@ data.x1 = 0; %[m]
 data.y1 = 0; %[m]
 data.z1 = 0; %[m]
 data.y2 = 5.25; %[m]
+data.z2 = -0.458; %[m]
 data.TEsw = 6.15; %[deg]
 data.dihedral = -5; %[deg]
 data.Sref = 77.3; %[m^2]
 
 %Change this!
-data.WAW = 10000; %[kg] GUESS VALUE
+data.WAW = 31877.853; %[kg] For now, ZFW - Wing weight 
 data.WSref = 545.72; %[kg/m^2]
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
@@ -40,8 +41,8 @@ data.airfoil_num =    2;       %[number of airfoils]
 data.eng_mass    =    606;     %[kg]
 data.pitch_rib   =    0.5;     %[m]
 data.eff_factor  =    0.96;    %Depend on the stringer type
-data.front_spar  =    0.2      %[-]
-data.rear_spar   =    0.6      %[-]
+data.front_spar  =    0.16      %[-]
+data.rear_spar   =    0.62      %[-]
 data.ftank_start =    0.1;     %[y/y3]
 data.ftank_end   =    0.85;    %[y/y3]
 data.eng_num     =    2;       %[-]
@@ -58,15 +59,22 @@ CSTroot = readmatrix('RootRefCST.txt');
 CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot; CSTtip];
 
-x0 = [CST; 3.94; 0.75; 0.475; 0; 0; 17.82; 26.21; 5000; 10023; 16];
-
+xref = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  1978.0735*2 ; 10023; 16];
+x0 = xref./xref
 %% Bounds Vectors
 CSTlb = readmatrix('CSTLowerBound.txt');
 CSTub = readmatrix('CSTUpperBound.txt');
 
 %Lower Bound 
-%CHANGE Wwing!!!!!
-lb = [CSTlb;3.152;0.6;0.38;-15;-15;10;20.96;4000;8018;11.2];
-
+lb = [CSTlb; 3.152; 0.6; 0.38; -15; -15; 10; 20.96; 3000; 8018; 11.2];
+lb = lb./xref
 %Upper Bound
-ub = [CSTub;4.728;0.9;0.57;15;15;25;31.44;6000;12027;20.8];
+ub = [CSTub; 4.728; 0.9; 0.57; 15; 15; 25; 31.44; 5000; 12027; 20.8];
+ub = ub./xref
+%%_Calling on FMINCON to run Optimization_%%
+options = optimset('Display','iter','Algorithm','sqp');
+
+[x,fval,exitflag,output] = fmincon(@objective, x0, [], [], [] , [], lb, ub, @constraints , options);
+
+x_opt = x
+fun_opt = fval

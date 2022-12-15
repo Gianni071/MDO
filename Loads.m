@@ -4,6 +4,8 @@ global data
 %Design Vector Entries:
 %x = [CST,c1,lambda1,lambda2,theta2,theta3,LEsw,b,Wwing,Wfuel,L/DcrAC]
 %x = [1-24,25, 26      27      28     29    30  31  32    33     34]
+xref = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  3956.147 ; 10023; 16];
+x = x.*xref
 
 %%_Q3D starter code_%%
 % Wing planform geometry 
@@ -96,7 +98,6 @@ Airfoil_tip =    'TipAirfoil.txt';
 wing_surf   =    S;
 
 x2 = x(25) - x(25)*x(26) + data.y2*sind(data.TEsw);  %%%THIS IS IN DEGREES SHOULD BE IN X AS WELL 
-z2 = -0.458;
 x3 = x2 + (b/2 - y2)*sind(x(30)); %%%THIS IS IN DEGREES SHOULD BE IN X AS WELL
 y3 = x(30)/2;
 z3 = y3*sind(-5);
@@ -113,7 +114,7 @@ fprintf(fid, '0 %s \n', Airfoil_root);
 fprintf(fid, '1 %s \n', Airfoil_tip);
 
 fprintf(fid, '%g %g %g %g %g %g \n', root_chord, data.x1, data.y1, data.z1, data.front_spar, data.rear_spar);
-fprintf(fid, '%g %g %g %g %g %g \n', root_chord*taper1, x2, data.y2, z2, data.front_spar, data.rear_spar);
+fprintf(fid, '%g %g %g %g %g %g \n', root_chord*taper1, x2, data.y2, data.z2, data.front_spar, data.rear_spar);
 fprintf(fid, '%g %g %g %g %g %g \n', root_chord*taper1*taper2, x3, y3, z3, data.front_spar, data.rear_spar);
 
 fprintf(fid, '%g %g \n', data.ftank_start, data.ftank_end);
@@ -130,5 +131,3 @@ fprintf(fid, '%g %g %g %g \n', data.E_al, data.rho_al, data.Ft_al, data.Fc_al);
 fprintf(fid,'%g %g \n', data.eff_factor, data.pitch_rib);
 fprintf(fid, '%g \n', vis);
 fclose(fid);
-
-%%Still need to write the output files to variables ???
