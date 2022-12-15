@@ -129,5 +129,3 @@ fprintf(fid, '%g %g %g %g \n', data.E_al, data.rho_al, data.Ft_al, data.Fc_al);
 fprintf(fid,'%g %g \n', data.eff_factor, data.pitch_rib);
 fprintf(fid, '%g \n', vis);
 fclose(fid);
-
-%%Still need to write the output files to variables ???

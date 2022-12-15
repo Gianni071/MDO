@@ -41,8 +41,8 @@ data.airfoil_num =    2;       %[number of airfoils]
 data.eng_mass    =    606;     %[kg]
 data.pitch_rib   =    0.5;     %[m]
 data.eff_factor  =    0.96;    %Depend on the stringer type
-data.front_spar  =    0.2      %[-]
-data.rear_spar   =    0.6      %[-]
+data.front_spar  =    0.16      %[-]
+data.rear_spar   =    0.62      %[-]
 data.ftank_start =    0.1;     %[y/y3]
 data.ftank_end   =    0.85;    %[y/y3]
 data.eng_num     =    2;       %[-]
@@ -70,3 +70,11 @@ lb = [CSTlb; 3.152; 0.6; 0.38; -15; -15; 10; 20.96; 3000; 8018; 11.2];
 
 %Upper Bound
 ub = [CSTub; 4.728; 0.9; 0.57; 15; 15; 25; 31.44; 5000; 12027; 20.8];
+
+%%_Calling on FMINCON to run Optimization_%%
+options = optimset('Display','iter','Algorithm','sqp');
+
+[x,fval,exitflag,output] = fmincon(@objective, x0, [], [], [] , [], lb, ub, @constraints , options);
+
+x_opt = x
+fun_opt = fval
