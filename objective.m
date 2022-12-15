@@ -2,8 +2,11 @@ function [f] = objective(x)
 
 global data
 
-loads(x,0)
-Structural(x)
+Loads(x,0);
+Structural();
+aerodynamics(x,1);
+Performance(x);
+
 
 %Design Vector Entries:
 %x = [CST,c1,lambda1,lambda2,theta2,theta3,LEsw,b,Wwing,Wfuel,L/DcrAC]

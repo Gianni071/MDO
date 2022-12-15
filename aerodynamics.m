@@ -4,7 +4,7 @@ global data
 %Design Vector Entries:
 %x = [CST,c1,lambda1,lambda2,theta2,theta3,LEsw,b,Wwing,Wfuel,L/DcrAC]
 %x = [1-24,25, 26      27      28     29    30  31  32    33     34]
-
+x = x.*data.xref;
 %Constant variables (TAKE THIS FROM GLOBAL WHEN ACTUALLY RUNNING)
 y2 = data.y2; %[m]
 TEsw = data.TEsw; %[deg]
@@ -25,8 +25,8 @@ CST = [CST1;CST2];
 c1 = x(25); %[m]
 lambda1 = x(26); %[-]
 lambda2 = x(27); %[-]
-theta2 = x(28); %[deg]
-theta3 = x(29); %[deg]
+theta2 = x(28)-100; %[deg]
+theta3 = x(29)-100; %[deg]
 LEsw = x(30); %[deg]
 b = x(31); %[m]
 Wwing = 9.81*x(32); %[N]
