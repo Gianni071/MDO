@@ -83,7 +83,6 @@ array = [Res.Wing.Yst;
          Moment_Load]
 
 fid = fopen('RJ85.load','wt');
-
 fprintf(fid, '%f %f %f \n', 0, 47214.015443, -47735.241443 );
 fprintf(fid, '%f %f %f \n', array);
 fprintf(fid, '%f %f %f \n', 1.0, 0, 0);

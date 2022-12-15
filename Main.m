@@ -6,7 +6,7 @@ clear all
 global data
 
 %Fuselage drag
-data.Dfus = 11323.74; %[N]
+data.Dfus = 5100.3; %[N]
 
 %Reference planform values
 data.x1 = 0; %[m]
