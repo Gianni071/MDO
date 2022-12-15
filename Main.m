@@ -17,6 +17,7 @@ data.z2 = -0.458; %[m]
 data.TEsw = 6.15; %[deg]
 data.dihedral = -5; %[deg]
 data.Sref = 77.3; %[m^2]
+data.Vaux = 1.174; %[m^3]
 
 %Change this!
 data.WAW = 31877.853; %[kg] For now, ZFW - Wing weight 
@@ -59,22 +60,41 @@ CSTroot = readmatrix('RootRefCST.txt');
 CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot; CSTtip];
 
-x0 = [CST; 3.94; 0.75; 0.475; 0; 0; 17.82; 26.21;  1978.0735*2 ; 10023; 16];
-
+xref = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  1978.0735*2 ; 10023; 16];
+data.xref = xref;
+x0 = xref./xref;
 %% Bounds Vectors
 CSTlb = readmatrix('CSTLowerBound.txt');
 CSTub = readmatrix('CSTUpperBound.txt');
 
 %Lower Bound 
-lb = [CSTlb; 3.152; 0.6; 0.38; -15; -15; 10; 20.96; 3000; 8018; 11.2];
-
+lb = [CSTlb; 3.152; 0.6; 0.38; 85; 85; 10; 20.96; 3000; 8018; 11.2];
+lb = lb./xref;
 %Upper Bound
-ub = [CSTub; 4.728; 0.9; 0.57; 15; 15; 25; 31.44; 5000; 12027; 20.8];
+ub = [CSTub; 4.728; 0.9; 0.57; 115; 115; 25; 31.44; 5000; 12027; 20.8];
+ub = ub./xref;
+
 
 %%_Calling on FMINCON to run Optimization_%%
-options = optimset('Display','iter','Algorithm','sqp');
+%OPTIONS
+options.Display         = 'iter';
+options.Algorithm       = 'sqp';
+options.FunValCheck     = 'off';
+options.DiffMinChange   = 1e-2;         % Minimum change while gradient searching
+options.DiffMaxChange   = 5e-1;         % Maximum change while gradient searching
+options.TolCon          = 1e-4;         % Maximum difference between two subsequent constraint vectors [c and ceq]
+options.TolFun          = 1e-3;         % Maximum difference between two subsequent objective value
+options.TolX            = 1e-3;         % Maximum difference between two subsequent design vectors
+options.PlotFcns = {@optimplotfval, @optimplotx, @optimplotfirstorderopt};
+options.ScaleProblem = 'false';
 
+options.MaxIter         = 1;           % Maximum iterations
+options.MaxFunctionEvaluations = 1;   
+%FMINCON
+tic
 [x,fval,exitflag,output] = fmincon(@objective, x0, [], [], [] , [], lb, ub, @constraints , options);
+toc
 
-x_opt = x
-fun_opt = fval
+x_opt = x;
+fun_opt = fval;
+

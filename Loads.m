@@ -1,21 +1,23 @@
-function[RJ85.init, RJ85.load] = Loads(x, vis)
+function [hoi] = Loads(x,vis)
 
 global data 
 %Design Vector Entries:
 %x = [CST,c1,lambda1,lambda2,theta2,theta3,LEsw,b,Wwing,Wfuel,L/DcrAC]
 %x = [1-24,25, 26      27      28     29    30  31  32    33     34]
+xref = data.xref;
+x = x.*xref;
 
 x2 = x(25) - x(25)*x(26) + data.y2*sind(data.TEsw);  %%%THIS IS IN DEGREES SHOULD BE IN X AS WELL 
-x3 = x2 + (b/2 - y2)*sind(x(30)); %%%THIS IS IN DEGREES SHOULD BE IN X AS WELL
-y3 = x(30)/2;
+x3 = x2 + (x(31)/2 - data.y2)*sind(x(30)); %%%THIS IS IN DEGREES SHOULD BE IN X AS WELL
+y3 = x(31)/2;
 z3 = y3*sind(-5);
 
 %%_Q3D starter code_%%
 % Wing planform geometry 
 %               x  y  z  chord(m)  twist angle (deg) 
 AC.Wing.Geom = [data.x1 data.y1 data.z1 x(25)              0;
-                x2      data.y2 data.z2 x(25)*x(26)        x(28);
-                x3      y3      z3      x(25)*x(26)*x(27)  x(29)];
+                x2      data.y2 data.z2 x(25)*x(26)        x(28)-100;
+                x3      y3      z3      x(25)*x(26)*x(27)  x(29)-100];
 
 % Wing incidence angle (degree)
 AC.Wing.inc  = 0;   
@@ -25,7 +27,7 @@ AC.Wing.inc  = 0;
 AC.Wing.Airfoils   = [x(1) x(2) x(3) x(4) x(5) x(6) x(7) x(8) x(9) x(10) x(11) x(12);
                       x(13) x(14) x(15) x(16) x(17) x(18) x(19) x(20) x(21) x(22) x(23) x(24)];
 
-AC.Wing.eta = [0; data.y2/(x(31)/2); 1];  % Spanwise location of the airfoil sections
+AC.Wing.eta = [0; 1];  % Spanwise location of the airfoil sections
 
 % Viscous vs inviscid
 AC.Visc  = vis;              % 0 for inviscid and 1 for viscous analysis
@@ -77,12 +79,15 @@ xairfoil = transpose(linspace(0,1,101));
 [Xtu_root, Xtl_root] = D_airfoil2(RootUp, RootLow, xairfoil);
 [Xtu_tip, Xtl_tip] = D_airfoil2(TipUp, TipLow, xairfoil);
 
-fid = fopen('RootAirfoil.txt','wt');
+Xtu_root = flip(Xtu_root);
+Xtu_tip = flip(Xtu_tip);
+
+fid = fopen('RootAirfoil.dat','wt');
 fprintf(fid, '%f %f \n', Xtu_root');
 fprintf(fid, '%f %f \n', Xtl_root');
 fclose(fid);
 
-fid = fopen('TipAirfoil.txt','wt');
+fid = fopen('TipAirfoil.dat','wt');
 fprintf(fid, '%f %f \n', Xtu_tip');
 fprintf(fid, '%f %f \n', Xtl_tip');
 fclose(fid);
@@ -96,14 +101,14 @@ span        =    x(31);            %[m]
 root_chord  =    x(25);            %[m]
 taper1      =    x(26);            %[-]
 taper2      =    x(27);            %[-]
-Airfoil_root=    'RootAirfoil.txt';
-Airfoil_tip =    'TipAirfoil.txt';
+Airfoil_root=    'RootAirfoil';
+Airfoil_tip =    'TipAirfoil';
 wing_surf   =    S;
 
 %%%_Print statements for input file for the EMWET procedure_%%%
 
 fid = fopen('RJ85.init','wt');
-fprintf(fid, '%g %g \n', MTOW*9.81, MZF);
+fprintf(fid, '%g %g \n', MTOW, MZF);
 fprintf(fid, '%g \n', nz_max);
 
 fprintf(fid, '%g %g %g %g \n', wing_surf, span, data.section_num, data.airfoil_num);
@@ -118,7 +123,7 @@ fprintf(fid, '%g %g %g %g %g %g \n', root_chord*taper1*taper2, x3, y3, z3, data.
 fprintf(fid, '%g %g \n', data.ftank_start, data.ftank_end);
 
 fprintf(fid, '%g \n', data.eng_num);
-fprintf(fid, '%g  %g \n', data.eng_ypos1, data,eng_mass);
+fprintf(fid, '%g  %g \n', data.eng_ypos1, data.eng_mass);
 fprintf(fid, '%g  %g \n', data.eng_ypos2, data.eng_mass);
 
 fprintf(fid, '%g %g %g %g \n', data.E_al, data.rho_al, data.Ft_al, data.Fc_al);
@@ -129,3 +134,5 @@ fprintf(fid, '%g %g %g %g \n', data.E_al, data.rho_al, data.Ft_al, data.Fc_al);
 fprintf(fid,'%g %g \n', data.eff_factor, data.pitch_rib);
 fprintf(fid, '%g \n', vis);
 fclose(fid);
+
+hoi = 1;
