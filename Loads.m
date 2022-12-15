@@ -7,12 +7,17 @@ global data
 xref = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  3956.147 ; 10023; 16];
 x = x.*xref
 
+x2 = x(25) - x(25)*x(26) + data.y2*sind(data.TEsw);  %%%THIS IS IN DEGREES SHOULD BE IN X AS WELL 
+x3 = x2 + (b/2 - y2)*sind(x(30)); %%%THIS IS IN DEGREES SHOULD BE IN X AS WELL
+y3 = x(30)/2;
+z3 = y3*sind(-5);
+
 %%_Q3D starter code_%%
 % Wing planform geometry 
 %               x  y  z  chord(m)  twist angle (deg) 
-AC.Wing.Geom = [data.x1 data.y1 data.z1 data.c1 0;
-                data.x2 data.y2 data.z2 data.c2 data.theta2;
-                data.x3 data.y3 data.z3 data.c3 data.theta3];
+AC.Wing.Geom = [data.x1 data.y1 data.z1 x(25)              0;
+                x2      data.y2 data.z2 x(25)*x(26)        x(28);
+                x3      y3      z3      x(25)*x(26)*x(27)  x(29)];
 
 % Wing incidence angle (degree)
 AC.Wing.inc  = 0;   
@@ -96,11 +101,6 @@ taper2      =    x(27);            %[-]
 Airfoil_root=    'RootAirfoil.txt';
 Airfoil_tip =    'TipAirfoil.txt';
 wing_surf   =    S;
-
-x2 = x(25) - x(25)*x(26) + data.y2*sind(data.TEsw);  %%%THIS IS IN DEGREES SHOULD BE IN X AS WELL 
-x3 = x2 + (b/2 - y2)*sind(x(30)); %%%THIS IS IN DEGREES SHOULD BE IN X AS WELL
-y3 = x(30)/2;
-z3 = y3*sind(-5);
 
 %%%_Print statements for input file for the EMWET procedure_%%%
 
