@@ -18,7 +18,7 @@ data.dihedral = -5; %[deg]
 data.Sref = 77.3; %[m^2]
 
 %Change this!
-data.WAW = 10000; %[kg] GUESS VALUE
+data.WAW = 10000; %[kg] GUESS VALUE  1
 data.WSref = 545.72; %[kg/m^2]
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
@@ -58,15 +58,14 @@ CSTroot = readmatrix('RootRefCST.txt');
 CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot; CSTtip];
 
-x0 = [CST; 3.94; 0.75; 0.475; 0; 0; 17.82; 26.21; 5000; 10023; 16];
+x0 = [CST; 3.94; 0.75; 0.475; 0; 0; 17.82; 26.21;  1978.0735*2 ; 10023; 16];
 
 %% Bounds Vectors
 CSTlb = readmatrix('CSTLowerBound.txt');
 CSTub = readmatrix('CSTUpperBound.txt');
 
 %Lower Bound 
-%CHANGE Wwing!!!!!
-lb = [CSTlb;3.152;0.6;0.38;-15;-15;10;20.96;4000;8018;11.2];
+lb = [CSTlb; 3.152; 0.6; 0.38; -15; -15; 10; 20.96; 3000; 8018; 11.2];
 
 %Upper Bound
-ub = [CSTub;4.728;0.9;0.57;15;15;25;31.44;6000;12027;20.8];
+ub = [CSTub; 4.728; 0.9; 0.57; 15; 15; 25; 31.44; 5000; 12027; 20.8];

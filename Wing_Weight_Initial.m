@@ -48,8 +48,7 @@ AC.Wing.eta = [0; y2/(b/2); 1];  % Spanwise location of the airfoil sections
 % Viscous vs inviscid
 AC.Visc  = 0;              % 0 for inviscid and 1 for viscous analysis
 AC.Aero.MaxIterIndex = 150;    %Maximum number of Iteration for the
-                                %convergence of viscous calculation
-                               
+                                %convergence of viscous calculation               
 a = 304; 
 MAC = S/b;
 
@@ -60,8 +59,8 @@ AC.Aero.rho   = 0.4663;         % air density  (kg/m3)
 AC.Aero.alt   = 8839.2;             % flight altitude (m)
 AC.Aero.Re    = AC.Aero.rho*AC.Aero.V*MAC/(0.00001504);        % reynolds number (bqased on mean aerodynamic chord)
 AC.Aero.M     = AC.Aero.V/a ;           % flight Mach number 
-n_max = 2.5
-AC.Aero.CL    = (n_max*MTOW*9.81)/(0.5*AC.Aero.rho*AC.Aero.V^2*S)          % lift coefficient - comment this line to run the code for given alpha%
+n_max = 2.5;
+AC.Aero.CL    = (n_max*MTOW*9.81)/(0.5*AC.Aero.rho*AC.Aero.V^2*S);         % lift coefficient - comment this line to run the code for given alpha%
 %AC.Aero.Alpha = 2;             % angle of attack -  comment this line to run the code for given cl 
 
 %% 
@@ -71,23 +70,19 @@ Res = Q3D_solver(AC);
 
 toc
 
-%scatter([x1, x2, x3, x1+c1, x2+c2, x3+c3], [y1, y2, y3, y1, y2, y3])
-%axis([0,20,0,20])
-scatter(Res.Wing.Yst, Res.Wing.ccl)
-
 Res.Wing.Yst = (Res.Wing.Yst')/(b/2);
 Lift_Load = (Res.Wing.ccl*0.5*AC.Aero.rho*AC.Aero.V^2*(0.066921*b/2))';
 Moment_Load = ((0.066921*b/2)*Res.Wing.chord.*Res.Wing.chord.*Res.Wing.cm_c4*0.5*AC.Aero.rho*AC.Aero.V^2)';
 array = [Res.Wing.Yst;
          Lift_Load;
-         Moment_Load]
+         Moment_Load];
 
 fid = fopen('RJ85.load','wt');
 fprintf(fid, '%f %f %f \n', 0, 47214.015443, -47735.241443 );
 fprintf(fid, '%f %f %f \n', array);
 fprintf(fid, '%f %f %f \n', 1.0, 0, 0);
 
-fclose(fid)
+fclose(fid);
 
 %%%_____Routine to write the input file for the EMWET procedure________% %%
 
@@ -144,6 +139,8 @@ fprintf(fid, '%g %g %g %g \n',E_al,rho_al,Ft_al,Fc_al);
 fprintf(fid, '%g %g %g %g \n',E_al,rho_al,Ft_al,Fc_al);
 fprintf(fid, '%g %g %g %g \n',E_al,rho_al,Ft_al,Fc_al);
 
-fprintf(fid,'%g %g \n',eff_factor,pitch_rib)
-fprintf(fid,'1 \n')
-fclose(fid)
+fprintf(fid,'%g %g \n',eff_factor,pitch_rib);
+fprintf(fid,'1 \n');
+fclose(fid);
+
+EMWET('RJ85')
