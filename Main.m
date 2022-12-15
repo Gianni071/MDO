@@ -13,12 +13,13 @@ data.x1 = 0; %[m]
 data.y1 = 0; %[m]
 data.z1 = 0; %[m]
 data.y2 = 5.25; %[m]
+data.z2 = -0.458; %[m]
 data.TEsw = 6.15; %[deg]
 data.dihedral = -5; %[deg]
 data.Sref = 77.3; %[m^2]
 
 %Change this!
-data.WAW = 10000; %[kg] GUESS VALUE  1
+data.WAW = 31877.853; %[kg] For now, ZFW - Wing weight 
 data.WSref = 545.72; %[kg/m^2]
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)

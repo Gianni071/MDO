@@ -96,7 +96,6 @@ Airfoil_tip =    'TipAirfoil.txt';
 wing_surf   =    S;
 
 x2 = x(25) - x(25)*x(26) + data.y2*sind(data.TEsw);  %%%THIS IS IN DEGREES SHOULD BE IN X AS WELL 
-z2 = -0.458;
 x3 = x2 + (b/2 - y2)*sind(x(30)); %%%THIS IS IN DEGREES SHOULD BE IN X AS WELL
 y3 = x(30)/2;
 z3 = y3*sind(-5);
@@ -113,7 +112,7 @@ fprintf(fid, '0 %s \n', Airfoil_root);
 fprintf(fid, '1 %s \n', Airfoil_tip);
 
 fprintf(fid, '%g %g %g %g %g %g \n', root_chord, data.x1, data.y1, data.z1, data.front_spar, data.rear_spar);
-fprintf(fid, '%g %g %g %g %g %g \n', root_chord*taper1, x2, data.y2, z2, data.front_spar, data.rear_spar);
+fprintf(fid, '%g %g %g %g %g %g \n', root_chord*taper1, x2, data.y2, data.z2, data.front_spar, data.rear_spar);
 fprintf(fid, '%g %g %g %g %g %g \n', root_chord*taper1*taper2, x3, y3, z3, data.front_spar, data.rear_spar);
 
 fprintf(fid, '%g %g \n', data.ftank_start, data.ftank_end);
