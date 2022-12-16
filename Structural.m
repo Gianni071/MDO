@@ -2,14 +2,10 @@ function[W_wing] = Structural()
 
 EMWET('RJ85')
 
-filename = 'RJ85.weight';
-delimiterIn = ' ';
-headerlinesIn = 4;
-A = importdata(filename, delimiterIn, headerlinesIn);
-B = A.textdata{1, 1}(23:-1);
+fid = fopen('RJ85.weight', 'r');
+A = fgetl(fid);
+A1 = split(A, " ");
+W_str = str2double(A1(4));
 
-W_wing = B
-
-W_wing = B;
-W_wing = str2num(W_wing);
+W_wing = W_str;
 data.Wwing = W_wing;
