@@ -43,7 +43,7 @@ AC.Wing.inc  = 0;
 AC.Wing.Airfoils   = [0.1621 0.2506 -0.05801 0.4901 0.01004 0.7148 -0.2468 -0.1792 -0.05085 -0.5233 0.08111 0.3562;
                       0.09264 0.1434 -0.03347 0.2805 0.005353 0.4087 -0.1410 -0.1025 -0.02887 -0.2992 0.04652 0.2034];
 
-AC.Wing.eta = [0; y2/(b/2); 1];  % Spanwise location of the airfoil sections
+AC.Wing.eta = [0; 1];  % Spanwise location of the airfoil sections
 
 % Viscous vs inviscid
 AC.Visc  = 0;              % 0 for inviscid and 1 for viscous analysis
@@ -71,14 +71,14 @@ Res = Q3D_solver(AC);
 toc
 
 Res.Wing.Yst = (Res.Wing.Yst')/(b/2);
-Lift_Load = (Res.Wing.ccl*0.5*AC.Aero.rho*AC.Aero.V^2*(0.066921*b/2))';
-Moment_Load = ((0.066921*b/2)*Res.Wing.chord.*Res.Wing.chord.*Res.Wing.cm_c4*0.5*AC.Aero.rho*AC.Aero.V^2)';
+Lift_Load = (Res.Wing.ccl*0.5*AC.Aero.rho*AC.Aero.V^2)';
+Moment_Load = (MAC*Res.Wing.chord.*Res.Wing.cm_c4*0.5*AC.Aero.rho*AC.Aero.V^2)';
 array = [Res.Wing.Yst;
          Lift_Load;
          Moment_Load];
 
 fid = fopen('RJ85.load','wt');
-fprintf(fid, '%f %f %f \n', 0, 47214.015443, -47735.241443 );
+fprintf(fid, '%f %f %f \n', 0, array(2,1), array(3,1) );
 fprintf(fid, '%f %f %f \n', array);
 fprintf(fid, '%f %f %f \n', 1.0, 0, 0);
 
@@ -128,7 +128,7 @@ fprintf(fid, '%g %g %g %g %g %g \n', root_chord, x1, y1, z1, spar_front, spar_re
 fprintf(fid, '%g %g %g %g %g %g \n', root_chord*taper1, x2, y2, z2, spar_front, spar_rear);
 fprintf(fid, '%g %g %g %g %g %g \n', root_chord*taper1*taper2, x3, y3, z3, spar_front, spar_rear);
 
-fprintf(fid, '%g %g \n',ftank_start, ftank_end);
+fprintf(fid, '%g %g \n', ftank_start, ftank_end);
 
 fprintf(fid, '%g \n', eng_num);
 fprintf(fid, '%g  %g \n', eng_ypos1, eng_mass);
@@ -139,7 +139,7 @@ fprintf(fid, '%g %g %g %g \n',E_al,rho_al,Ft_al,Fc_al);
 fprintf(fid, '%g %g %g %g \n',E_al,rho_al,Ft_al,Fc_al);
 fprintf(fid, '%g %g %g %g \n',E_al,rho_al,Ft_al,Fc_al);
 
-fprintf(fid,'%g %g \n',eff_factor,pitch_rib);
+fprintf(fid,'%g %g \n',eff_factor, pitch_rib);
 fprintf(fid,'1 \n');
 fclose(fid);
 

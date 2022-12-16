@@ -88,8 +88,8 @@ options.TolX            = 1e-3;         % Maximum difference between two subsequ
 options.PlotFcns = {@optimplotfval, @optimplotx, @optimplotfirstorderopt};
 options.ScaleProblem = 'false';
 
-options.MaxIter         = 1;           % Maximum iterations
-options.MaxFunctionEvaluations = 1;   
+options.MaxIter         = 100;           % Maximum iterations
+options.MaxFunctionEvaluations = 100;   
 %FMINCON
 tic
 [x,fval,exitflag,output] = fmincon(@objective, x0, [], [], [] , [], lb, ub, @constraints , options);

@@ -1,5 +1,7 @@
 function[W_wing] = Structural()
 
+global data 
+
 EMWET('RJ85')
 
 fid = fopen('RJ85.weight', 'r');
