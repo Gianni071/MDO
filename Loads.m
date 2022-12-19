@@ -55,8 +55,8 @@ toc
 
 %%_Writing results of Q3D in to a .load txt file_%%
 Res.Wing.Yst = (Res.Wing.Yst')/(x(31)/2);
-Lift_Load = (Res.Wing.ccl*0.5*AC.Aero.rho*AC.Aero.V^2*(0.066921*x(31)/2))';
-Moment_Load = ((0.066921*x(31)/2)*Res.Wing.chord.*Res.Wing.chord.*Res.Wing.cm_c4*0.5*AC.Aero.rho*AC.Aero.V^2)';
+Lift_Load = (Res.Wing.ccl*0.5*AC.Aero.rho*AC.Aero.V^2)';
+Moment_Load = (MAC*Res.Wing.chord.*Res.Wing.cm_c4*0.5*AC.Aero.rho*AC.Aero.V^2)';
 array = [Res.Wing.Yst; Lift_Load; Moment_Load];
 
 fid = fopen('RJ85.load','wt');

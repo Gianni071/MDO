@@ -53,7 +53,7 @@ a = 304;
 MAC = S/b;
 
 % Flight Condition
-MTOW          = 42184;         %[kg]
+MTOW          = 42410;         %[kg]
 AC.Aero.V     = 0.73*304;            % flight speed (m/s)
 AC.Aero.rho   = 0.4663;         % air density  (kg/m3)
 AC.Aero.alt   = 8839.2;             % flight altitude (m)
@@ -87,7 +87,7 @@ fclose(fid);
 %%%_____Routine to write the input file for the EMWET procedure________% %%
 
 namefile    =    char('RJ85.init');
-MTOW        =    42184;         %[kg]
+MTOW        =    42410;         %[kg]
 MZF         =    35834;         %[kg]
 nz_max      =    n_max;   
 span        =    b;            %[m]
@@ -99,8 +99,8 @@ spar_rear   =    0.6;
 ftank_start =    0.1;
 ftank_end   =    0.85;
 eng_num     =    2;
-eng_ypos1   =    0.31;
-eng_ypos2   =    0.51;
+eng_ypos1   =    0.315;
+eng_ypos2   =    0.50;
 
 eng_mass    =    606;         %kg
 E_al        =    70E9;       %N/m2
