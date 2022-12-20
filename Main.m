@@ -6,7 +6,7 @@ clear all
 global data
 
 %Fuselage drag
-data.Dfus = 5100.3; %[N]
+data.Dfus = 12006.92; %[N]
 
 %Reference planform values
 data.x1 = 0; %[m]
@@ -20,8 +20,9 @@ data.Sref = 77.3; %[m^2]
 data.Vaux = 1.174; %[m^3]
 
 %Change this!
-data.WAW = 31877.853; %[kg] For now, ZFW - Wing weight 
+data.WAW = 30951.45; %[kg] ZFW - Wing weight 
 data.WSref = 545.72; %[kg/m^2]
+data.MTOWref = 45857; %[kg]
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
 data.Vcr = 356; %[kts]
@@ -60,7 +61,7 @@ CSTroot = readmatrix('RootRefCST.txt');
 CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot; CSTtip];
 
-xref = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  1978.0735*2 ; 10023; 16];
+xref = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  4882.55 ; 10023; 16];
 data.xref = xref;
 x0 = xref./xref;
 %% Bounds Vectors
@@ -68,10 +69,10 @@ CSTlb = readmatrix('CSTLowerBound.txt');
 CSTub = readmatrix('CSTUpperBound.txt');
 
 %Lower Bound 
-lb = [CSTlb; 3.152; 0.6; 0.38; 85; 85; 10; 20.96; 3000; 8018; 11.2];
+lb = [CSTlb; 3.152; 0.6; 0.38; 85; 85; 10; 20.96; 3906.04; 8018; 11.2];
 lb = lb./xref;
 %Upper Bound
-ub = [CSTub; 4.728; 0.9; 0.57; 115; 115; 25; 31.44; 5000; 12027; 20.8];
+ub = [CSTub; 4.728; 0.9; 0.57; 115; 115; 25; 31.44; 5859.06; 12027; 20.8];
 ub = ub./xref;
 
 
@@ -88,8 +89,6 @@ options.TolX            = 1e-3;         % Maximum difference between two subsequ
 options.PlotFcns = {@optimplotfval, @optimplotx, @optimplotfirstorderopt};
 options.ScaleProblem = 'false';
 
-options.MaxIter         = 100;           % Maximum iterations
-options.MaxFunctionEvaluations = 100;   
 %FMINCON
 tic
 [x,fval,exitflag,output] = fmincon(@objective, x0, [], [], [] , [], lb, ub, @constraints , options);

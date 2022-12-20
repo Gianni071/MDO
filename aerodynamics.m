@@ -19,7 +19,7 @@ dynvis = data.dynvis; %[Pa s]
 %Design Variables
 CST1 = x(1:12); %[-]
 CST2 = x(13:24); %[-]
-CST1= transpose(CST1);
+CST1 = transpose(CST1);
 CST2 = transpose(CST2);
 CST = [CST1;CST2];
 c1 = x(25); %[m]

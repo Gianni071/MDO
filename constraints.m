@@ -36,10 +36,10 @@ c2 = lambda1*c1;
 c3 = lambda2*c2;
 
 %% Consistency 1
-ceq1 = Wfuelhat - Wfuel;
+ceq1 = Wfuelhat/Wfuel - 1;
 
 %% Consistency 2
-ceq2 = Wwinghat - Wwing;
+ceq2 = Wwinghat/Wwing - 1;
 
 %% Consistency 3
 S = 2*(y2*(c1+c2)/2+(y3-y2)*(c2+c3)/2);
@@ -47,7 +47,7 @@ L = CL*0.5*rho*V^2*S;
 D = CD*0.5*rho*V^2*S + Dfus;
 LD = L/D;
 
-ceq3 = LDhat - LD;
+ceq3 = LDhat/LD - 1;
 
 ceq = [ceq1;ceq2;ceq3];
 
@@ -56,7 +56,7 @@ WTO = Wfuel+Wwing+WAW;
 
 WScalc = WTO/S;
 
-con1 = WScalc - WSref;
+con1 = WScalc/WSref - 1;
 
 %% Inequality 2 Fuel Tank Volume
 rhofuel = 0.81715*10^3; %[kg/m^3]
@@ -139,6 +139,7 @@ Vtot = 0.93*2*(Vin+Vout);
 
 %Calculate constraint
 Vreq = Wfuelhat/rhofuel;
-con2 = Vreq - Vaux - Vtot;
+Vtot2 = Vaux + Vtot;
+con2 = Vreq/Vtot2 - 1;
 
 c = [con1;con2];
