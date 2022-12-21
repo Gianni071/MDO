@@ -20,7 +20,7 @@ data.Sref = 77.3; %[m^2]
 data.Vaux = 1.174; %[m^3]
 
 %Change this!
-data.WAW = 30951.45; %[kg] ZFW - Wing weight 
+data.WAW = 30975.44; %[kg] ZFW - Wing weight 
 data.WSref = 545.72; %[kg/m^2]
 data.MTOWref = 45857; %[kg]
 
@@ -61,7 +61,7 @@ CSTroot = readmatrix('RootRefCST.txt');
 CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot; CSTtip];
 
-xref = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  4882.55 ; 10023; 16];
+xref = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  4858.56 ; 10023; 16];
 data.xref = xref;
 x0 = xref./xref;
 %% Bounds Vectors

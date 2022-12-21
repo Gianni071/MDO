@@ -17,7 +17,7 @@ data.TEsw = 6.15; %[deg]
 data.dihedral = -5; %[deg]
 data.Sref = 77.3; %[m^2]
 data.Vaux = 1.174; %[m^3]
-data.WAW = 30951.45; %[kg] ZFW - Wing weight 
+data.WAW = 30975.44; %[kg] ZFW - Wing weight 
 data.WSref = 545.72; %[kg/m^2]
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
@@ -33,7 +33,7 @@ CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot;CSTtip];
 
 vis = 1;
-x = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  4882.55 ; 10023; 16];
+x = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  4858.56 ; 10023; 16];
 c1 = x(25);
 lambda1 = x(26);
 lambda2 = x(27);
