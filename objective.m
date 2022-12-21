@@ -1,6 +1,7 @@
 function [f] = objective(x)
 
 global data
+
 Loads(x,0);
 Structural();
 aerodynamics(x,1);
