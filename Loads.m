@@ -49,9 +49,7 @@ AC.Aero.CL    = (n_max*MTOW*9.81)/(0.5*AC.Aero.rho*AC.Aero.V^2*S);          % li
 %AC.Aero.Alpha = 2;             % angle of attack -  comment this line to run the code for given cl 
 
 %% 
-tic
 Res = Q3D_solver(AC);
-toc
 
 %%_Writing results of Q3D in to a .load txt file_%%
 Res.Wing.Yst = (Res.Wing.Yst')/(x(31)/2);
@@ -134,5 +132,3 @@ fprintf(fid, '%g %g %g %g \n', data.E_al, data.rho_al, data.Ft_al, data.Fc_al);
 fprintf(fid,'%g %g \n', data.eff_factor, data.pitch_rib);
 fprintf(fid, '%g \n', vis);
 fclose(fid);
-
-hoi = 1;
