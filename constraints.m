@@ -77,7 +77,7 @@ XtlRoot = XtlRt*c1;
 %Root airfoil area
 dx1 = XtuRoot(2,1)-XtuRoot(1,1);
 A1 = 0;
-for i = 9:31
+for i = 9:30
     tn = XtuRoot(i,2) - XtlRoot(i,2);
     tn1 = XtuRoot(i+1,2) - XtlRoot(i+1,2);
     Ai = dx1*(tn+tn1)/2;
@@ -89,7 +89,7 @@ XtuMid = XtuRt*c2;
 XtlMid = XtlRt*c2;
 dx2 = XtuMid(2,1)-XtuMid(1,1);
 A2 = 0;
-for i = 9:31
+for i = 9:30
     tn = XtuMid(i,2) - XtlMid(i,2);
     tn1 = XtuMid(i+1,2) - XtlMid(i+1,2);
     Ai = dx2*(tn+tn1)/2;
@@ -101,7 +101,7 @@ end
 [Xtutip,Xtltip] = D_airfoil2(TipUp,TipLow,xairfoil);
 
 %Calculate c85 (85% semi-span) based on planform
-c85 = (c3-c2)/(y3-y2)*(0.9*y3 - y2) + c2;
+c85 = (c3-c2)/(y3-y2)*(0.85*y3 - y2) + c2;
 
 %85% span airfoil coordinates
 Xtutip = c85*Xtutip;
@@ -111,7 +111,7 @@ dx3 = Xtutip(2,1) - Xtutip(1,1);
 A3 = 0;
 
 %Loop to calculate cross-sectional area
-for i = 9:31
+for i = 9:30
     tn = Xtutip(i,2) - Xtltip(i,2);
     tn1 = Xtutip(i+1,2) - Xtltip(i+1,2);
     Ai = dx3*(tn+tn1)/2;
@@ -132,7 +132,7 @@ Vin = Ain*y2;
 Aout = (A2+A3)/2;
 
 %Volume
-Vout = Aout*(0.9*y3 - y2);
+Vout = Aout*(0.85*y3 - y2);
 
 %Total volume of wing fuel tank:
 Vtot = 0.93*2*(Vin+Vout);
