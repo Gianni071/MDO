@@ -18,4 +18,13 @@ x = xnor.*xref;
 
 %Compute relevant values using x vector
 
-aerodynamics(xnor,1);
+%% Initial Design Vector
+%Design Vector Entries:
+%x = [CST,c1,lambda1,lambda2,theta2,theta3,LEsw,b,Wwing,Wfuel,L/DcrAC]
+%x = [1-24,25, 26      27      28     29    30  31  32    33     34]
+
+%%__Plot the Wing__%%
+x2 = x(25) + data.y2 * sind(data.TESW) - x(25)*x(26);
+x3 = x2 + (x(31)/2 - data.y2)*sind(x(30));
+
+plot([data.x1, x2, x3, data.x1 + x(25), x2 + x(25)*x(26), x3 + x(25)*x(26)*x(27)], [data.y1, data.y2, x(31)/2, data.y1, data.y2, x(31)/2])
