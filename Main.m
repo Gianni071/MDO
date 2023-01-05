@@ -6,7 +6,7 @@ clear all
 global data
 
 %Fuselage drag
-data.Dfus = 12006.92; %[N]
+data.Dfus = 10899.25; %[N]
 
 %Reference planform values
 data.x1 = 0; %[m]
@@ -16,13 +16,13 @@ data.y2 = 5.25; %[m]
 data.z2 = -0.458; %[m]
 data.TEsw = 6.15; %[deg]
 data.dihedral = -5; %[deg]
-data.Sref = 77.3; %[m^2]
+data.Sref = 75.246; %[m^2]
 data.Vaux = 1.174; %[m^3]
 
 %Change this!
-data.WAW = 30951.45; %[kg] ZFW - Wing weight 
-data.WSref = 545.72; %[kg/m^2]
-data.MTOWref = 45857; %[kg]
+data.WAW = 27299.95; %[kg] ZFW - Wing weight 
+data.WSref = 560.61; %[kg/m^2]
+data.MTOWref = 42184; %[kg]
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
 data.Vcr = 356; %[kts]
@@ -44,7 +44,7 @@ data.eng_mass    =    606;     %[kg]
 data.pitch_rib   =    0.5;     %[m]
 data.eff_factor  =    0.96;    %Depend on the stringer type
 data.front_spar  =    0.16;      %[-]
-data.rear_spar   =    0.62;      %[-]
+data.rear_spar   =    0.6;      %[-]
 data.ftank_start =    0.1;     %[y/y3]
 data.ftank_end   =    0.85;    %[y/y3]
 data.eng_num     =    2;       %[-]
@@ -61,7 +61,7 @@ CSTroot = readmatrix('RootRefCST.txt');
 CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot; CSTtip];
 
-xref = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  4882.55 ; 10023; 16];
+xref = [CST; 4.128; 0.75; 0.522; 100; 100; 17.82; 26.34;  4776.1 ; 10107.95; 16];
 data.xref = xref;
 x0 = xref./xref;
 %% Bounds Vectors
@@ -69,10 +69,10 @@ CSTlb = readmatrix('CSTLowerBound.txt');
 CSTub = readmatrix('CSTUpperBound.txt');
 
 %Lower Bound 
-lb = [CSTlb; 3.152; 0.6; 0.38; 85; 85; 10; 20.96; 3906.04; 8018; 11.2];
+lb = [CSTlb; 3.302; 0.6; 0.418; 85; 85; 10; 21.07; 3820.88; 8086.36; 11.2];
 lb = lb./xref;
 %Upper Bound
-ub = [CSTub; 4.728; 0.9; 0.57; 115; 115; 25; 31.44; 5859.06; 12027; 20.8];
+ub = [CSTub; 4.954; 0.9; 0.626; 115; 115; 25; 31.61; 5731.3; 12129.5; 20.8];
 ub = ub./xref;
 
 
@@ -81,10 +81,10 @@ ub = ub./xref;
 options.Display         = 'iter';
 options.Algorithm       = 'sqp';
 options.FunValCheck     = 'off';
-options.DiffMinChange   = 1e-2;         % Minimum change while gradient searching
+options.DiffMinChange   = 5e-3;         % Minimum change while gradient searching
 options.DiffMaxChange   = 5e-1;         % Maximum change while gradient searching
-options.TolCon          = 1e-4;         % Maximum difference between two subsequent constraint vectors [c and ceq]
-options.TolFun          = 1e-3;         % Maximum difference between two subsequent objective value
+options.TolCon          = 1e-5;         % Maximum difference between two subsequent constraint vectors [c and ceq]
+options.TolFun          = 1e-4;         % Maximum difference between two subsequent objective value
 options.TolX            = 1e-3;         % Maximum difference between two subsequent design vectors
 options.PlotFcns = {@optimplotfval, @optimplotx, @optimplotfirstorderopt};
 options.ScaleProblem = 'false';

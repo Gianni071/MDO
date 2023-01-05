@@ -34,7 +34,7 @@ AC.Visc  = vis;              % 0 for inviscid and 1 for viscous analysis
 AC.Aero.MaxIterIndex = 150;  %Maximum number of Iteration for the
                              %convergence of viscous calculation
                                
-S = 2*((x(25) + x(25)*x(26)/2)*data.y2 + (((x(25)*x(26) + x(25)*x(26)*x(27))/2)*x(31)/2 - data.y2));
+S = 2*(data.y2*(x(25)+x(25)*x(26))/2 + (x(31)/2 - data.y2)*(x(25)*x(26) + x(25)*x(26)*x(27))/2);
 MAC = S/x(31);               %Mean aerodynamic chord [m]
 
 % Flight Condition

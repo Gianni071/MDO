@@ -1,6 +1,7 @@
 function [f] = objective(x)
 tic
 global data
+
 Loads(x,0);
 Structural();
 aerodynamics(x,1);

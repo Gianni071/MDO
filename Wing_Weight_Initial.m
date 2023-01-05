@@ -49,15 +49,15 @@ AC.Wing.eta = [0; 1];  % Spanwise location of the airfoil sections
 AC.Visc  = 0;              % 0 for inviscid and 1 for viscous analysis
 AC.Aero.MaxIterIndex = 150;    %Maximum number of Iteration for the
                                 %convergence of viscous calculation               
-a = 304; 
+a = 304.484; 
 MAC = S/b;
 
 % Flight Condition
 MTOW          = 42410;         %[kg]
-AC.Aero.V     = 0.73*304;            % flight speed (m/s)
-AC.Aero.rho   = 0.4663;         % air density  (kg/m3)
+AC.Aero.V     = 0.73*a;            % flight speed (m/s)
+AC.Aero.rho   = 0.475448;         % air density  (kg/m3)
 AC.Aero.alt   = 8839.2;             % flight altitude (m)
-AC.Aero.Re    = AC.Aero.rho*AC.Aero.V*MAC/(0.00001504);        % reynolds number (bqased on mean aerodynamic chord)
+AC.Aero.Re    = AC.Aero.rho*AC.Aero.V*MAC/(0.0000151075);        % reynolds number (bqased on mean aerodynamic chord)
 AC.Aero.M     = AC.Aero.V/a ;           % flight Mach number 
 n_max = 2.5;
 AC.Aero.CL    = (n_max*MTOW*9.81)/(0.5*AC.Aero.rho*AC.Aero.V^2*S);         % lift coefficient - comment this line to run the code for given alpha%
