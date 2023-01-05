@@ -61,7 +61,7 @@ CSTroot = readmatrix('RootRefCST.txt');
 CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot; CSTtip];
 
-xref = [CST; 4.128; 0.75; 0.522; 100; 100; 17.82; 26.34;  4776.1 ; 10107.95; 16];
+xref = [CST; 4.128; 0.75; 0.522; 100; 100; 17.82; 26.34;  4774.7 ; 10107.95; 16];
 data.xref = xref;
 x0 = xref./xref;
 %% Bounds Vectors
@@ -69,10 +69,10 @@ CSTlb = readmatrix('CSTLowerBound.txt');
 CSTub = readmatrix('CSTUpperBound.txt');
 
 %Lower Bound 
-lb = [CSTlb; 3.302; 0.6; 0.418; 85; 85; 10; 21.07; 3820.88; 8086.36; 11.2];
+lb = [CSTlb; 3.302; 0.5625; 0.3915; 85; 85; 14.256; 21.07; 3581.03; 8086.36; 11.2];
 lb = lb./xref;
 %Upper Bound
-ub = [CSTub; 4.954; 0.9; 0.626; 115; 115; 25; 31.61; 5731.3; 12129.5; 20.8];
+ub = [CSTub; 4.954; 0.9375; 0.6525; 115; 115; 21.384; 31.61; 5968.4; 12129.5; 20.8];
 ub = ub./xref;
 
 
@@ -82,8 +82,8 @@ options.Display         = 'iter';
 options.Algorithm       = 'sqp';
 options.FunValCheck     = 'off';
 options.DiffMinChange   = 5e-3;         % Minimum change while gradient searching
-options.DiffMaxChange   = 5e-1;         % Maximum change while gradient searching
-options.TolCon          = 1e-5;         % Maximum difference between two subsequent constraint vectors [c and ceq]
+options.DiffMaxChange   = 1e-1;         % Maximum change while gradient searching
+options.TolCon          = 1e-4;         % Maximum difference between two subsequent constraint vectors [c and ceq]
 options.TolFun          = 1e-4;         % Maximum difference between two subsequent objective value
 options.TolX            = 1e-3;         % Maximum difference between two subsequent design vectors
 options.PlotFcns = {@optimplotfval, @optimplotx, @optimplotfirstorderopt};
