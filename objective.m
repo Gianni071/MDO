@@ -1,5 +1,5 @@
 function [f] = objective(x)
-
+tic
 global data
 Loads(x,0);
 Structural();
@@ -13,5 +13,5 @@ Performance(x);
 xref = data.xref;
 
 f = (x(32)*xref(32) + x(33)*xref(33) + data.WAW)/data.MTOWref;
-
+toc
 end
