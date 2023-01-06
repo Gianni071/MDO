@@ -85,7 +85,7 @@ options.DiffMinChange   = 5e-3;         % Minimum change while gradient searchin
 options.DiffMaxChange   = 1e-1;         % Maximum change while gradient searching
 options.TolCon          = 1e-4;         % Maximum difference between two subsequent constraint vectors [c and ceq]
 options.TolFun          = 1e-4;         % Maximum difference between two subsequent objective value
-options.TolX            = 1e-3;         % Maximum difference between two subsequent design vectors
+options.TolX            = 1e-4;         % Maximum difference between two subsequent design vectors
 options.PlotFcns = {@optimplotfval, @optimplotx, @optimplotfirstorderopt};
 options.ScaleProblem = 'false';
 

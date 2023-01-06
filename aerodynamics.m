@@ -49,7 +49,7 @@ WTO = Wwing+WAW+Wfuel;
 Wdes = sqrt(WTO*(WTO-Wfuel));
 
 %Flight Conditions 
-Re = (3.17*rho*V)/dynvis;
+Re = ((S/b)*rho*V)/dynvis;
 M = V/a;
 CL = Wdes/(0.5*rho*V^2*S);
 
