@@ -15,7 +15,6 @@ C_T = 1.8639*10^(-4);
 v = data.Vcr*0.51444;
 
 MTOW = W_fuel + W_wing + Aircraft_Wing;
-%MTOW = data.MTOWref;
 
 Ws_We = exp(R*(C_T/v)*(1/LD));
 

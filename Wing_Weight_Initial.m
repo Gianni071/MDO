@@ -3,15 +3,15 @@ clear all
 close all
 clc
 
-b = 26.21;
+b = 26.34;
 
 lambda1 = 0.750; 
-lambda2 = 0.475; 
+lambda2 = 0.522; 
 
 delta_TE_in = 6.15*pi/180;
 delta_LE_out = 17.82*pi/180;
 
-c1 = 3.94;
+c1 = 4.128;
 c2 = lambda1*c1; 
 c3 = lambda2*c2;
 
@@ -53,7 +53,7 @@ a = 304.484;
 MAC = S/b;
 
 % Flight Condition
-MTOW          = 42410;         %[kg]
+MTOW          = 42184;         %[kg]
 AC.Aero.V     = 0.73*a;            % flight speed (m/s)
 AC.Aero.rho   = 0.475448;         % air density  (kg/m3)
 AC.Aero.alt   = 8839.2;             % flight altitude (m)
@@ -87,14 +87,14 @@ fclose(fid);
 %%%_____Routine to write the input file for the EMWET procedure________% %%
 
 namefile    =    char('RJ85.init');
-MTOW        =    42410;         %[kg]
+MTOW        =    42184;         %[kg]
 MZF         =    35834;         %[kg]
 nz_max      =    n_max;   
 span        =    b;            %[m]
 root_chord  =    c1;           %[m]
 taper1      =    lambda1;
 taper2      =    lambda2;
-spar_front  =    0.2;
+spar_front  =    0.16;
 spar_rear   =    0.6;
 ftank_start =    0.1;
 ftank_end   =    0.85;
@@ -115,9 +115,9 @@ section_num =    3;
 airfoil_num =    2;
 wing_surf   =    S;
 
-fid = fopen('RJ85.init','wt');
+fid = fopen('RJ85.init', 'wt');
 fprintf(fid, '%g %g \n', MTOW, MZF);
-fprintf(fid, '%g \n',nz_max);
+fprintf(fid, '%g \n', nz_max);
 
 fprintf(fid, '%g %g %g %g \n', wing_surf, span, section_num, airfoil_num);
 
@@ -134,10 +134,10 @@ fprintf(fid, '%g \n', eng_num);
 fprintf(fid, '%g  %g \n', eng_ypos1, eng_mass);
 fprintf(fid, '%g  %g \n', eng_ypos2, eng_mass);
 
-fprintf(fid, '%g %g %g %g \n',E_al,rho_al,Ft_al,Fc_al);
-fprintf(fid, '%g %g %g %g \n',E_al,rho_al,Ft_al,Fc_al);
-fprintf(fid, '%g %g %g %g \n',E_al,rho_al,Ft_al,Fc_al);
-fprintf(fid, '%g %g %g %g \n',E_al,rho_al,Ft_al,Fc_al);
+fprintf(fid, '%g %g %g %g \n', E_al,rho_al, Ft_al, Fc_al);
+fprintf(fid, '%g %g %g %g \n', E_al,rho_al, Ft_al, Fc_al);
+fprintf(fid, '%g %g %g %g \n', E_al,rho_al, Ft_al, Fc_al);
+fprintf(fid, '%g %g %g %g \n', E_al,rho_al, Ft_al, Fc_al);
 
 fprintf(fid,'%g %g \n',eff_factor, pitch_rib);
 fprintf(fid,'1 \n');
