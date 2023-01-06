@@ -1,12 +1,12 @@
 clc
-clear all
 close all
+clear all
 
 %% Define Constants
 global data
 
 %Fuselage drag
-data.Dfus = 12006.92; %[N]
+data.Dfus = 10899.25; %[N]
 
 %Reference planform values
 data.x1 = 0; %[m]
@@ -16,13 +16,13 @@ data.y2 = 5.25; %[m]
 data.z2 = -0.458; %[m]
 data.TEsw = 6.15; %[deg]
 data.dihedral = -5; %[deg]
-data.Sref = 77.3; %[m^2]
+data.Sref = 75.246; %[m^2]
 data.Vaux = 1.174; %[m^3]
 
 %Change this!
-data.WAW = 30975.44; %[kg] ZFW - Wing weight 
-data.WSref = 545.72; %[kg/m^2]
-data.MTOWref = 45857; %[kg]
+data.WAW = 27301.35; %[kg] ZFW - Wing weight 
+data.WSref = 560.61; %[kg/m^2]
+data.MTOWref = 42184; %[kg]
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
 data.Vcr = 356; %[kts]
@@ -44,12 +44,13 @@ data.eng_mass    =    606;     %[kg]
 data.pitch_rib   =    0.5;     %[m]
 data.eff_factor  =    0.96;    %Depend on the stringer type
 data.front_spar  =    0.16;      %[-]
-data.rear_spar   =    0.62;      %[-]
+data.rear_spar   =    0.6;      %[-]
 data.ftank_start =    0.1;     %[y/y3]
 data.ftank_end   =    0.85;    %[y/y3]
 data.eng_num     =    2;       %[-]
 data.eng_ypos1   =    0.315;   %[y/y3]
 data.eng_ypos2   =    0.50;    %[y/y3]
+
 matobj = matfile("run3.mat");
 
 xnor = matobj.x;
