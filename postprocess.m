@@ -50,7 +50,7 @@ data.ftank_end   =    0.85;    %[y/y3]
 data.eng_num     =    2;       %[-]
 data.eng_ypos1   =    0.315;   %[y/y3]
 data.eng_ypos2   =    0.50;    %[y/y3]
-matobj = matfile("Run1.mat");
+matobj = matfile("run2.mat");
 
 xnor = matobj.x;
 
@@ -75,12 +75,12 @@ x3 = x2 + (x(31)/2 - data.y2)*sind(x(30));
 x2ref = xref(25) + data.y2 * sind(data.TEsw) - xref(25)*xref(26);
 x3ref = x2ref + (xref(31)/2 - data.y2)*sind(xref(30));
 
-% plot([data.x1, x2, x3,  x3 + x(25)*x(26)*x(27), x2 + x(25)*x(26), data.x1 + x(25)], [data.y1, data.y2, x(31)/2, x(31)/2, data.y2, data.y1], "b")
-% hold on 
-% plot([data.x1, x2ref, x3ref,  x3ref + xref(25)*xref(26)*xref(27), x2ref + xref(25)*xref(26), data.x1 + xref(25)], [data.y1, data.y2, xref(31)/2, xref(31)/2, data.y2, data.y1], "r")
-% xlim([0,16])
-% ylim([0,16])
-% figure()
+plot([data.x1, x2, x3,  x3 + x(25)*x(26)*x(27), x2 + x(25)*x(26), data.x1 + x(25)], [data.y1, data.y2, x(31)/2, x(31)/2, data.y2, data.y1], "b")
+hold on 
+plot([data.x1, x2ref, x3ref,  x3ref + xref(25)*xref(26)*xref(27), x2ref + xref(25)*xref(26), data.x1 + xref(25)], [data.y1, data.y2, xref(31)/2, xref(31)/2, data.y2, data.y1], "r")
+xlim([0,16])
+ylim([0,16])
+figure()
 
 %%_Plot the Airfoil__%%
 CST_root    = [ x(1:12) ];
@@ -104,33 +104,33 @@ xairfoil = transpose(linspace(0,1,101));
 [Xtu_root_init, Xtl_root_init] = D_airfoil2(RootUp_init, RootLow_init, xairfoil);
 [Xtu_tip_init, Xtl_tip_init] = D_airfoil2(TipUp_init, TipLow_init, xairfoil);
 
-% plot(Xtl_root(:,1), Xtl_root(:,2), "b")
-% hold on 
-% plot(Xtu_root(:,1), Xtu_root(:,2), "b")
-% hold on
-% plot(Xtl_root_init(:,1), Xtl_root_init(:,2), "r")
-% hold on 
-% plot(Xtu_root_init(:,1), Xtu_root_init(:,2), "r")
-% ylim([-0.5, 0.5])
-% figure()
-
-% plot(Xtl_tip(:,1), Xtl_tip(:,2), "b")
-% hold on 
-% plot(Xtu_tip(:,1), Xtu_tip(:,2), "b")
-% hold on
-% plot(Xtl_tip_init(:,1), Xtl_tip_init(:,2), "r")
-% hold on 
-% plot(Xtu_tip_init(:,1), Xtu_tip_init(:,2), "r")
-% ylim([-0.5, 0.5])
-% figure()
-
-%%__Plot the Wing in 3D__%%
-scatter3(Xtl_tip(:,1), Xtl_tip(:,2), xref(31)*ones(1, 101)')
-hold on
-scatter3(Xtu_tip(:,1), Xtu_tip(:,2), xref(31)*ones(1, 101)')
+plot(Xtl_root(:,1), Xtl_root(:,2), "b")
 hold on 
-scatter3(Xtl_root(:,1), Xtl_root(:,2), 0.*ones(1, 101)')
+plot(Xtu_root(:,1), Xtu_root(:,2), "b")
 hold on
-scatter3(Xtu_root(:,1), Xtu_root(:,2), 0.*ones(1, 101)')
+plot(Xtl_root_init(:,1), Xtl_root_init(:,2), "r")
+hold on 
+plot(Xtu_root_init(:,1), Xtu_root_init(:,2), "r")
+ylim([-0.5, 0.5])
+figure()
+
+plot(Xtl_tip(:,1), Xtl_tip(:,2), "b")
+hold on 
+plot(Xtu_tip(:,1), Xtu_tip(:,2), "b")
+hold on
+plot(Xtl_tip_init(:,1), Xtl_tip_init(:,2), "r")
+hold on 
+plot(Xtu_tip_init(:,1), Xtu_tip_init(:,2), "r")
+ylim([-0.5, 0.5])
+figure()
+
+% %%__Plot the Wing in 3D__%%
+% scatter3(Xtl_tip(:,1), Xtl_tip(:,2), xref(31)*ones(1, 101)')
+% hold on
+% scatter3(Xtu_tip(:,1), Xtu_tip(:,2), xref(31)*ones(1, 101)')
+% hold on 
+% scatter3(Xtl_root(:,1), Xtl_root(:,2), 0.*ones(1, 101)')
+% hold on
+% scatter3(Xtu_root(:,1), Xtu_root(:,2), 0.*ones(1, 101)')
 
 
