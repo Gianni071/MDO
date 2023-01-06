@@ -20,7 +20,7 @@ data.Sref = 75.246; %[m^2]
 data.Vaux = 1.174; %[m^3]
 
 %Change this!
-data.WAW = 27299.95; %[kg] ZFW - Wing weight 
+data.WAW = 27301.35; %[kg] ZFW - Wing weight 
 data.WSref = 560.61; %[kg/m^2]
 data.MTOWref = 42184; %[kg]
 
