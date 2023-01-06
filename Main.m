@@ -2,6 +2,8 @@ clc
 close all
 clear all
 
+%%hello 
+
 %% Define Constants
 global data
 
