@@ -50,7 +50,7 @@ data.ftank_end   =    0.85;    %[y/y3]
 data.eng_num     =    2;       %[-]
 data.eng_ypos1   =    0.315;   %[y/y3]
 data.eng_ypos2   =    0.50;    %[y/y3]
-matobj = matfile("run2.mat");
+matobj = matfile("run3.mat");
 
 xnor = matobj.x;
 
