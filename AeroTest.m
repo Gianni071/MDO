@@ -15,10 +15,10 @@ data.y2 = 5.25; %[m]
 data.z2 = -0.458; %[m]
 data.TEsw = 6.15; %[deg]
 data.dihedral = -5; %[deg]
-data.Sref = 77.3; %[m^2]
+data.Sref = 75.246; %[m^2]
 data.Vaux = 1.174; %[m^3]
-data.WAW = 30975.44; %[kg] ZFW - Wing weight 
-data.WSref = 545.72; %[kg/m^2]
+data.WAW = 27301.35; %[kg] ZFW - Wing weight 
+data.WSref = 560.61; %[kg/m^2]
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
 data.Vcr = 356; %[kts]
@@ -33,15 +33,16 @@ CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot;CSTtip];
 
 vis = 1;
-x = [CST; 3.94; 0.75; 0.475; 100; 100; 17.82; 26.21;  4858.56 ; 10023; 16];
-c1 = x(25);
+data.xref = [CST; 4.128; 0.75; 0.522; 100; 100; 17.82; 26.34;  4774.7 ; 10107.95; 15];
+x = [CST; 4.128; 0.75; 0.522; 100; 100; 17.82; 26.34;  4774.7 ; 10107.95; 15];
+xnor = ones(34,1);
 lambda1 = x(26);
 lambda2 = x(27);
 b = x(31);
 Wwinghat = x(32);
 Wfuelhat = x(33);
 LDhat = x(34);
-
+c1 = x(25);
 y2 = 5.25;
 y3 = b/2;
 c2 = lambda1*c1;
@@ -49,7 +50,7 @@ c3 = lambda2*c2;
 
 S = 2*(y2*(c1+c2)/2+(y3-y2)*(c2+c3)/2);
 
-[CL,CD] = aerodynamics(x,vis);
+[CL,CD] = aerodynamics(xnor,vis);
 
 %Reference L/D
 LDref = x(34);
@@ -61,9 +62,9 @@ CDfus = CL/LDref - CD;
 Vcr = 356; %[kts]
 rho = 0.475448; %[kg/m^3]
 V = 0.51444*Vcr; %[m/s]
-Sref = 77.3; %[m^2]
+Sref = 75.246; %[m^2]
 format long
-Dfus = CDfus*0.5*rho*V^2*S;
+Dfus = CDfus*0.5*rho*V^2*S
 
 
 

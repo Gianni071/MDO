@@ -8,7 +8,7 @@ clear all
 global data
 
 %Fuselage drag
-data.Dfus = 10899.25; %[N]
+data.Dfus = 12307.5387; %[N]
 
 %Reference planform values
 data.x1 = 0; %[m]
@@ -22,7 +22,7 @@ data.Sref = 75.246; %[m^2]
 data.Vaux = 1.174; %[m^3]
 
 %Change this!
-data.WAW = 27301.35; %[kg] ZFW - Wing weight 
+data.WAW = 26855.57; %[kg] ZFW - Wing weight 
 data.WSref = 560.61; %[kg/m^2]
 data.MTOWref = 42184; %[kg]
 
@@ -63,7 +63,7 @@ CSTroot = readmatrix('RootRefCST.txt');
 CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot; CSTtip];
 
-xref = [CST; 4.128; 0.75; 0.522; 100; 100; 17.82; 26.34;  4774.7 ; 10107.95; 16];
+xref = [CST; 4.128; 0.75; 0.522; 100; 100; 17.82; 26.34;  4774.7 ; 10553.734; 15];
 data.xref = xref;
 x0 = xref./xref;
 %% Bounds Vectors
@@ -71,10 +71,10 @@ CSTlb = readmatrix('CSTLowerBound.txt');
 CSTub = readmatrix('CSTUpperBound.txt');
 
 %Lower Bound 
-lb = [CSTlb; 3.302; 0.5625; 0.3915; 85; 85; 14.256; 21.07; 3581.03; 8086.36; 11.2];
+lb = [CSTlb; 3.302; 0.5625; 0.3915; 85; 85; 14.256; 21.07; 3581.03; 8442.99; 10.5];
 lb = lb./xref;
 %Upper Bound
-ub = [CSTub; 4.954; 0.9375; 0.6525; 115; 115; 21.384; 31.61; 5968.4; 12129.5; 20.8];
+ub = [CSTub; 4.954; 0.9375; 0.6525; 115; 115; 21.384; 31.61; 5968.4; 12664.48; 19.5];
 ub = ub./xref;
 
 

@@ -61,7 +61,7 @@ xref = [CST; 4.128; 0.75; 0.522; 100; 100; 17.82; 26.34;  4774.7 ; 10107.95; 16]
 data.xref = xref;
 
 %% Load run
-matobj = matfile("run4.mat");
+matobj = matfile("run5.mat");
 
 xnor = matobj.x;
 %xnor = xref./xref;
