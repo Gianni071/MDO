@@ -125,13 +125,13 @@ plot(Xtu_tip_init(:,1), Xtu_tip_init(:,2), "r")
 ylim([-0.5, 0.5])
 figure()
 
-% %%__Plot the Wing in 3D__%%
-% scatter3(Xtl_tip(:,1), Xtl_tip(:,2), xref(31)*ones(1, 101)')
-% hold on
-% scatter3(Xtu_tip(:,1), Xtu_tip(:,2), xref(31)*ones(1, 101)')
-% hold on 
-% scatter3(Xtl_root(:,1), Xtl_root(:,2), 0.*ones(1, 101)')
-% hold on
-% scatter3(Xtu_root(:,1), Xtu_root(:,2), 0.*ones(1, 101)')
+%%__Plot the Wing in 3D__%%
+scatter3(Xtl_tip(:,1), Xtl_tip(:,2), xref(31)*ones(1, 101)')
+hold on
+scatter3(Xtu_tip(:,1), Xtu_tip(:,2), xref(31)*ones(1, 101)')
+hold on 
+scatter3(Xtl_root(:,1), Xtl_root(:,2), 0.*ones(1, 101)')
+hold on
+scatter3(Xtu_root(:,1), Xtu_root(:,2), 0.*ones(1, 101)')
 
 
