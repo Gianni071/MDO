@@ -91,8 +91,8 @@ options.TolX            = 1e-4;         % Maximum difference between two subsequ
 options.PlotFcns = {@optimplotfval, @optimplotx, @optimplotfirstorderopt};
 options.ScaleProblem = 'false';
 options.OutputFcn = @outputFcn_global;
-options.MaxIter = 2;
-options.MaxFunEvals = 120;
+%options.MaxIter = 2;
+%options.MaxFunEvals = 120;
 
 global outputFcn_global_data
 
