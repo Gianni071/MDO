@@ -55,7 +55,7 @@ Xairfoil = t(k:length(t),1);
 
 %Fmincon setup
 Npar = 12;
-x0 = zeros(Npar,1);
+x0 = ones(Npar,1);
 lb = -1*ones(Npar,1);
 ub = ones(Npar,1);
 option = optimset('display','iter','algorithm','sqp');
@@ -82,10 +82,10 @@ Yl = Xtl(:,2);
 hold on;
 plot(Xairfoil,Yu,'b');
 plot(Xairfoil,Yl,'b');
-plot(Xairfoil,Yuref,'rx')
-plot(Xairfoil,Ylref,'rx')
+plot(Xcoords,Yuref,'rx')
+plot(Xcoords,Ylref,'rx')
 
-axis([0,1,-0.3,0.3]);
+axis([0,1,-0.5,0.5]);
 
 %Write CST coeff as txt
 %writematrix(x,"TipRefCST.txt")
