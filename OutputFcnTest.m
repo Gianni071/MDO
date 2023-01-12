@@ -61,7 +61,7 @@ data.xref = xref;
 x0 = xref./xref;
 
 %% Load Iteration Data
-matobj = matfile("iterationdata.mat");
+matobj = matfile("run6.mat");
 
 outputfcn = matobj.outputFcn_global_data;
 

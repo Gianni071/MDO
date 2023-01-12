@@ -2,7 +2,7 @@ clc
 clear all
 close all
 
-matobj = matfile('iterationplots.mat');
+matobj = matfile('run6plotdata.mat');
 
 
 carray = matobj.carray;
