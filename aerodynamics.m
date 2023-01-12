@@ -5,11 +5,12 @@ global data
 %x = [CST,c1,lambda1,lambda2,theta2,theta3,LEsw,b,Wwing,Wfuel,L/DcrAC]
 %x = [1-24,25, 26      27      28     29    30  31  32    33     34]
 x = x.*data.xref;
+%Constant variables (TAKE THIS FROM GLOBAL WHEN ACTUALLY RUNNING)
 
 y2 = data.y2; %[m]
 TEsw = data.TEsw; %[deg]
 dihedral = data.dihedral; %[deg]
-WAW = 9.81*data.WAW; %[N]
+WAW = 9.81*data.WAW; %[N] Guess value for now
 V = data.Vcr*0.51444; %[m/s]
 rho = data.rho; %[kg/m^3]
 alt = data.hcr*0.3048; %[m]
@@ -76,19 +77,18 @@ AC.Wing.eta = [0;1];  % Spanwise location of the airfoil sections
 AC.Visc  = vis;              % 0 for inviscid and 1 for viscous analysis
 
 % Flight Condition
-AC.Aero.V     = V;           % flight speed (m/s)
+AC.Aero.V     = V;            % flight speed (m/s)
 AC.Aero.rho   = rho;         % air density  (kg/m3)
-AC.Aero.alt   = alt;         % flight altitude (m)
-AC.Aero.Re    = Re;          % reynolds number (based on mean aerodynamic chord)
+AC.Aero.alt   = alt;             % flight altitude (m)
+AC.Aero.Re    = Re;        % reynolds number (based on mean aerodynamic chord)
 AC.Aero.M     = M;           % flight Mach number 
 AC.Aero.CL    = CL;          % lift coefficient - comment this line to run the code for given alpha%
-%AC.Aero.Alpha = 2;          % angle of attack -  comment this line to run the code for given cl 
+%AC.Aero.Alpha = 2;             % angle of attack -  comment this line to run the code for given cl 
 
 %Run Q3D
 Res = Q3D_solver(AC);
 
 %Output CL and CD
-
 CL = Res.CLwing;
 CD = Res.CDwing;
 

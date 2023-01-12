@@ -12,8 +12,6 @@ x3 = x2 + (x(31)/2 - data.y2)*sind(x(30)); %%%THIS IS IN DEGREES SHOULD BE IN X 
 y3 = x(31)/2;
 z3 = y3*sind(-5);
 
-
-
 %%_Q3D starter code_%%
 % Wing planform geometry 
 %               x  y  z  chord(m)  twist angle (deg) 
