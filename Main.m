@@ -90,6 +90,11 @@ options.TolFun          = 1e-4;         % Maximum difference between two subsequ
 options.TolX            = 1e-4;         % Maximum difference between two subsequent design vectors
 options.PlotFcns = {@optimplotfval, @optimplotx, @optimplotfirstorderopt};
 options.ScaleProblem = 'false';
+options.OutputFcn = @outputFcn_global;
+%options.MaxIter = 2;
+%options.MaxFunEvals = 120;
+
+global outputFcn_global_data
 
 %FMINCON
 tic
@@ -98,4 +103,3 @@ toc
 
 x_opt = x;
 fun_opt = fval;
-

@@ -7,7 +7,7 @@ clc
 global data
 
 %Fuselage drag
-data.Dfus = 10899.25; %[N]
+data.Dfus = 12307.5387; %[N]
 
 %Reference planform values
 data.x1 = 0; %[m]
@@ -21,7 +21,7 @@ data.Sref = 75.246; %[m^2]
 data.Vaux = 1.174; %[m^3]
 
 %Change this!
-data.WAW = 27299.95; %[kg] ZFW - Wing weight 
+data.WAW = 26855.57; %[kg] ZFW - Wing weight 
 data.WSref = 560.61; %[kg/m^2]
 data.MTOWref = 42184; %[kg]
 
@@ -57,7 +57,7 @@ CSTroot = readmatrix('RootRefCST.txt');
 CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot; CSTtip];
 
-xref = [CST; 4.128; 0.75; 0.522; 100; 100; 17.82; 26.34;  4774.7 ; 10107.95; 16];
+xref = [CST; 4.128; 0.75; 0.522; 100; 100; 17.82; 26.34;  4774.7 ; 10553.734; 15];
 data.xref = xref;
 
 %% Load run

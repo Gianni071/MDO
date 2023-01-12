@@ -38,8 +38,7 @@ data.Ft_al       =    295E6;        %N/m2
 data.Fc_al       =    295E6;        %N/m2
 
 %%Obtain the final optimized design variable matrix 
-matobj = matfile("run5.mat");
-
+matobj = matfile("iterationdata.mat");
 xnor = matobj.x;
 
 CSTroot = readmatrix('RootRefCST.txt');
@@ -60,11 +59,17 @@ x3 = x2 + (x(31)/2 - data.y2)*sind(x(30));
 x2ref = xref(25) + data.y2 * sind(data.TEsw) - xref(25)*xref(26);
 x3ref = x2ref + (xref(31)/2 - data.y2)*sind(xref(30));
 
-plot([data.x1, x2, x3,  x3 + x(25)*x(26)*x(27), x2 + x(25)*x(26), data.x1 + x(25)], [data.y1, data.y2, x(31)/2, x(31)/2, data.y2, data.y1], "b")
+plot([data.y1, data.y2, x(31)/2, x(31)/2, data.y2, data.y1], [data.x1, x2, x3,  x3 + x(25)*x(26)*x(27), x2 + x(25)*x(26), data.x1 + x(25)]*-1, "b")
 hold on 
-plot([data.x1, x2ref, x3ref,  x3ref + xref(25)*xref(26)*xref(27), x2ref + xref(25)*xref(26), data.x1 + xref(25)], [data.y1, data.y2, xref(31)/2, xref(31)/2, data.y2, data.y1], "r")
-xlim([0,16])
-ylim([0,16])
+plot([data.y1, data.y2, xref(31)/2, xref(31)/2, data.y2, data.y1], [data.x1, x2ref, x3ref,  x3ref + xref(25)*xref(26)*xref(27), x2ref + xref(25)*xref(26), data.x1 + xref(25)]*-1, "r")
+xlim([0,14])
+ylim([-10,4])
+title('Final and Initial Wing Planform')
+xlabel('y [m]')
+ylabel('x [m]')
+legend('Final', 'Initial')
+f = gcf;
+exportgraphics(f, '1_Planform.png', 'Resolution', 300);
 figure()
 
 %%_Plot the Airfoil__%%
@@ -91,32 +96,34 @@ xairfoil = transpose(linspace(0,1,101));
 
 plot(Xtl_root(:,1), Xtl_root(:,2), "b")
 hold on 
-plot(Xtu_root(:,1), Xtu_root(:,2), "b")
-hold on
 plot(Xtl_root_init(:,1), Xtl_root_init(:,2), "r")
 hold on 
+plot(Xtu_root(:,1), Xtu_root(:,2), "b")
+hold on
 plot(Xtu_root_init(:,1), Xtu_root_init(:,2), "r")
 ylim([-0.5, 0.5])
+title('Final and Initial Root Airfoils with Normalized Chord length')
+xlabel('Normalized Chord [-]')
+ylabel('z [-]')
+legend('Final', 'Initial')
+f = gcf;
+exportgraphics(f, '2_RootAirfoils.png', 'Resolution', 300);
 figure()
 
 plot(Xtl_tip(:,1), Xtl_tip(:,2), "b")
 hold on 
-plot(Xtu_tip(:,1), Xtu_tip(:,2), "b")
-hold on
 plot(Xtl_tip_init(:,1), Xtl_tip_init(:,2), "r")
 hold on 
+plot(Xtu_tip(:,1), Xtu_tip(:,2), "b")
+hold on
 plot(Xtu_tip_init(:,1), Xtu_tip_init(:,2), "r")
 ylim([-0.5, 0.5])
-figure()
-
-%%__Plot the Wing in 3D__%%
-scatter3(Xtl_tip(:,1), Xtl_tip(:,2), xref(31)*ones(1, 101)')
-hold on
-scatter3(Xtu_tip(:,1), Xtu_tip(:,2), xref(31)*ones(1, 101)')
-hold on 
-scatter3(Xtl_root(:,1), Xtl_root(:,2), 0.*ones(1, 101)')
-hold on
-scatter3(Xtu_root(:,1), Xtu_root(:,2), 0.*ones(1, 101)')
+title('Final and Initial Tip Airfoils with Normalized Chord length')
+xlabel('Normalized Chord [-]')
+ylabel('z [-]')
+legend('Final', 'Initial')
+f = gcf;
+exportgraphics(f, '3_TipAirfoils.png', 'Resolution', 300);
 figure()
 
 %% Spanwise lift distributions cruise conditions 
@@ -200,18 +207,43 @@ AC.Aero.CL    = CL;          % lift coefficient - comment this line to run the c
 %Run Q3D
 Res = Q3D_solver(AC);
 
-%%Plot of spanwise lift/drag distribution for Cruise Conditions 
-plot(Res.Wing.Yst, Res.Wing.cdi)
+%%Plot of spanwise drag distribution for Cruise Conditions 
+
+Yst_original = [0.4375, 1.3125, 2.1875, 3.0625, 3.9375, 4.8125, 5.745, 6.735, 7.725, 8.715, 9.705, 10.695, 11.685, 12.675];
+Y_section_original = [0	1.88142857142857	3.76285714285714	5.64428571428571	7.52571428571429	9.40714285714286	11.2885714285714	13.1700000000000];
+Cdi_original = [0.0242 0.0212 0.0187 0.0162 0.0138 0.0113 0.0094 0.008 0.0067 0.0055 0.0045 0.0038 0.0036 0.0048];
+Cd_wp_original = [0.00815521202298894, 0.00813098943781581, 0.00747140131850161, 0.00662576596947859, 0.00639008512427622, 0.00639007182314240, 0.00683690260393108, 0.00719597343206215];
+
+plot(Res.Wing.Yst/(x(31)/2), Res.Wing.cdi, "b")
 hold on
-plot(Res.Section.Y, Res.Section.Cd.')
+plot((Res.Section.Y/(x(31)/2)).', Res.Section.Cd)
+hold on 
+plot(Yst_original/(xref(31)/2), Cdi_original, 'r')
+hold on
+plot(Y_section_original/(xref(31)/2), Cd_wp_original)
+hold on 
+title('Spanwise Drag Distribution at Design Point')
+xlabel('Normalized Span [-]')
+ylabel('Drag Coefficient [-]')
+legend('Final Induced Drag', 'Final Profile + Wave Drag', 'Initial Induced Drag', 'Initial Profile + Wave Drag')
+f = gcf;
+exportgraphics(f, '4_DragDistribution.png', 'Resolution', 300);
 figure()
 
-plot(Res.Wing.Yst, Res.Wing.cl)
-figure()
+%%Plot of spanwise lift distribution for Cruise Conditions 
+Yst_original = [0.4375, 1.3125, 2.1875, 3.0625, 3.9375, 4.8125, 5.745, 6.735, 7.725, 8.715, 9.705, 10.695, 11.685, 12.675, xref(31)/2];
+ccl_original = [2.369, 2.3561, 2.2991, 2.2157, 2.1136, 1.9977, 1.8764, 1.7531, 1.6213, 1.4798, 1.3271, 1.1592, 0.9657, 0.7092, 0];
 
-plot(Res.Wing.Yst, Res.Wing.ccl) %%Should end on 0 right?
-Res.CLwing
+plot([Res.Wing.Yst/(x(31)/2); 1], [Res.Wing.ccl; 0], 'b')
 hold on
+plot(Yst_original/(xref(31)/2), ccl_original, 'r')
+title('Spanwise lift distribution (c*C_l) at Design Point')
+xlabel('Normalized Span [-]')
+ylabel('Lift Coefficient * Local Chord [m]')
+legend('Final', 'Initial')
+f = gcf;
+exportgraphics(f, '5_LiftDistributionCruise.png', 'Resolution', 300);
+figure()
 
 %% Spanwise lift distributions CRITICAL conditions 
 WAW = 9.81*data.WAW; %[N] 
@@ -259,11 +291,19 @@ AC.Aero.CL    = (n_max*MTOW)/(0.5*AC.Aero.rho*AC.Aero.V^2*S);         % lift coe
 %AC.Aero.Alpha = 2;             % angle of attack -  comment this line to run the code for given cl 
 
 %Run Q3D
-Res = Q3D_solver(AC);
+Res_crit = Q3D_solver(AC);
 
 %%Plot of spanwise lift distribution for CRITICAL Conditions 
-plot(Res.Wing.Yst, Res.Wing.ccl) %%Should end on 0 right?
-Res.CLwing
-figure()
+Yst_original = [0.4375, 1.3125, 2.1875, 3.0625, 3.9375, 4.8125, 5.745, 6.735, 7.725, 8.715, 9.705, 10.695, 11.685, 12.675, (xref(31)/2)];
+ccl_original_crit = [6.2418, 6.2496, 6.1745, 6.0448, 5.8714, 5.6615, 5.422, 5.1506, 4.846, 4.5051, 4.1197, 3.6697, 3.1035, 2.2556, 0];
 
-plot(Res.Wing.Yst, Res.Wing.cl)
+plot([Res_crit.Wing.Yst/(x(31)/2); 1] , [Res_crit.Wing.ccl; 0], "b")
+hold on 
+plot(Yst_original/(xref(31)/2), ccl_original_crit, "r")
+title('Spanwise lift distribution (c*C_l) at Critical Conditions')
+xlabel('Normalized Span [-]')
+ylabel('Lift Coefficient * Local Chord [m]')
+legend('Final', 'Initial')
+f = gcf;
+exportgraphics(f, '6_LiftDistributionCritical.png', 'Resolution', 300);
+figure()
