@@ -6,6 +6,7 @@ global data
 %x = [1-24,25, 26      27      28     29    30  31  32    33     34]
 x = x.*data.xref;
 %Constant variables (TAKE THIS FROM GLOBAL WHEN ACTUALLY RUNNING)
+
 y2 = data.y2; %[m]
 TEsw = data.TEsw; %[deg]
 dihedral = data.dihedral; %[deg]
@@ -88,7 +89,6 @@ AC.Aero.CL    = CL;          % lift coefficient - comment this line to run the c
 Res = Q3D_solver(AC);
 
 %Output CL and CD
-
 CL = Res.CLwing;
 CD = Res.CDwing;
 
