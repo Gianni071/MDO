@@ -69,7 +69,7 @@ xlabel('y [m]')
 ylabel('x [m]')
 legend('Final', 'Initial')
 f = gcf;
-exportgraphics(f, '1_Planform.png', 'Resolution', 300);
+exportgraphics(f, '1_Planform.jpg', 'Resolution', 300);
 figure()
 
 %%_Plot the Airfoil__%%
@@ -107,7 +107,7 @@ xlabel('Normalized Chord [-]')
 ylabel('z [-]')
 legend('Final', 'Initial')
 f = gcf;
-exportgraphics(f, '2_RootAirfoils.png', 'Resolution', 300);
+exportgraphics(f, '2_RootAirfoils.jpg', 'Resolution', 300);
 figure()
 
 plot(Xtl_tip(:,1), Xtl_tip(:,2), "b")
@@ -123,7 +123,7 @@ xlabel('Normalized Chord [-]')
 ylabel('z [-]')
 legend('Final', 'Initial')
 f = gcf;
-exportgraphics(f, '3_TipAirfoils.png', 'Resolution', 300);
+exportgraphics(f, '3_TipAirfoils.jpg', 'Resolution', 300);
 figure()
 
 %% Spanwise lift distributions cruise conditions 
@@ -227,7 +227,7 @@ xlabel('Normalized Span [-]')
 ylabel('Drag Coefficient [-]')
 legend('Final Induced Drag', 'Final Profile + Wave Drag', 'Initial Induced Drag', 'Initial Profile + Wave Drag')
 f = gcf;
-exportgraphics(f, '4_DragDistribution.png', 'Resolution', 300);
+exportgraphics(f, '4_DragDistribution.jpg', 'Resolution', 300);
 figure()
 
 %%Plot of spanwise lift distribution for Cruise Conditions 
@@ -242,7 +242,7 @@ xlabel('Normalized Span [-]')
 ylabel('Lift Coefficient * Local Chord [m]')
 legend('Final', 'Initial')
 f = gcf;
-exportgraphics(f, '5_LiftDistributionCruise.png', 'Resolution', 300);
+exportgraphics(f, '5_LiftDistributionCruise.jpg', 'Resolution', 300);
 figure()
 
 %% Spanwise lift distributions CRITICAL conditions 
@@ -305,5 +305,5 @@ xlabel('Normalized Span [-]')
 ylabel('Lift Coefficient * Local Chord [m]')
 legend('Final', 'Initial')
 f = gcf;
-exportgraphics(f, '6_LiftDistributionCritical.png', 'Resolution', 300);
+exportgraphics(f, '6_LiftDistributionCritical.jpg', 'Resolution', 300);
 figure()

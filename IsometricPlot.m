@@ -115,7 +115,7 @@ zlabel('z [m]')
 axis equal
 ylim([0, 13])
 f = gcf;
-exportgraphics(f, '7_IsometricWing_Final.png', 'Resolution', 300);
+exportgraphics(f, '7_IsometricWing_Final.jpg', 'Resolution', 300);
 figure()
 
 %%% Isometric view of Original wing 
@@ -171,4 +171,4 @@ zlabel('z [m]')
 axis equal
 ylim([0, 13])
 f = gcf;
-exportgraphics(f, '8_IsometricWing_Initial.png', 'Resolution', 300);
+exportgraphics(f, '8_IsometricWing_Initial.jpg', 'Resolution', 300);
