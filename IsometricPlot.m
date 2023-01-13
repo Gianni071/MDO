@@ -108,10 +108,67 @@ Y = [zeros(60,1), data.y2*ones(60,1), x(31)/2*ones(60,1)];
 Z = [[Xtu_root1(:,2); flip(Xtl_root1(:,2))] , [Xtu_kink(:,2); flip(Xtl_kink(:,2))], [Xtu_tip(:,2); flip(Xtl_tip(:,2))]];
 
 surf(X, Y, Z)
-title('Isometric View of Optimized Wing')
+title('Isometric View of Final Wing')
 xlabel('x [m]')
 ylabel('y [m]')
 zlabel('z [m]')
 axis equal
+ylim([0, 13])
 f = gcf;
-exportgraphics(f, '7_IsometricWing.png', 'Resolution', 300);
+exportgraphics(f, '7_IsometricWing_Final.png', 'Resolution', 300);
+figure()
+
+%%% Isometric view of Original wing 
+x = xref; 
+
+CST_root    = [ x(1:12) ];
+CST_tip     = [ x(13:24) ];
+
+RootUp = transpose(CST_root(1:6));
+RootLow = transpose(CST_root(7:12));
+TipUp = CST_tip(1:6);
+TipLow = CST_tip(7:12);
+
+xairfoil = transpose(linspace(0,1,30));
+
+[Xtu_root, Xtl_root] = D_airfoil2(RootUp, RootLow, xairfoil);
+[Xtu_tip, Xtl_tip] = D_airfoil2(TipUp, TipLow, xairfoil);
+
+Xtu_root1(:,1) = Xtu_root(:,1)*x(25); %%chordwise
+Xtu_root1(:,2) = Xtu_root(:,2)*x(25); %%up and down
+Xtl_root1(:,1) = Xtl_root(:,1)*x(25); %%chordwise
+Xtl_root1(:,2) = Xtl_root(:,2)*x(25); %%up and down
+
+dihedral = data.dihedral; %[deg]
+x2 = x(25) - x(25)*x(26) + data.y2*sind(data.TEsw); 
+y2 = data.y2; %[m]
+z2 = y2*sind(dihedral);
+
+Xtu_kink(:,1) = Xtu_root(:,1)*x(25)*x(26) + x2; %%chordwise
+Xtu_kink(:,2) = Xtu_root(:,2)*x(25)*x(26) + z2; %%up and down
+Xtl_kink(:,1) = Xtl_root(:,1)*x(25)*x(26) + x2; %%chordwise
+Xtl_kink(:,2) = Xtl_root(:,2)*x(25)*x(26) + z2; %%up and down
+
+x3 = x2 + (x(31)/2 - data.y2)*sind(x(30));
+y3 = x(31)/2;
+z3 = y3*sind(-5);
+z3 = y3*sind(dihedral);
+
+Xtu_tip(:,1) = Xtu_tip(:,1)*x(25)*x(26)*x(27) + x3; %%chordwise
+Xtu_tip(:,2) = Xtu_tip(:,2)*x(25)*x(26)*x(27) + z3; %%up and down
+Xtl_tip(:,1) = Xtl_tip(:,1)*x(25)*x(26)*x(27) + x3; %%chordwise
+Xtl_tip(:,2) = Xtl_tip(:,2)*x(25)*x(26)*x(27) + z3; %%up and down
+
+X = [[Xtu_root1(:,1); flip(Xtl_root1(:,1))], [Xtu_kink(:,1); flip(Xtl_kink(:,1))], [Xtu_tip(:,1); flip(Xtl_tip(:,1))]];
+Y = [zeros(60,1), data.y2*ones(60,1), x(31)/2*ones(60,1)];
+Z = [[Xtu_root1(:,2); flip(Xtl_root1(:,2))] , [Xtu_kink(:,2); flip(Xtl_kink(:,2))], [Xtu_tip(:,2); flip(Xtl_tip(:,2))]];
+
+surf(X, Y, Z)
+title('Isometric View of Initial Wing')
+xlabel('x [m]')
+ylabel('y [m]')
+zlabel('z [m]')
+axis equal
+ylim([0, 13])
+f = gcf;
+exportgraphics(f, '8_IsometricWing_Initial.png', 'Resolution', 300);
