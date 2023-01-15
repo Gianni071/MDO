@@ -146,6 +146,13 @@ AC.Aero.CL    = CL;          % lift coefficient - comment this line to run the c
 Res_original = Q3D_solver(AC);
 
 %% Aerodynamic solver for Spanwise Lift Distribution in CRITICAL Conditions
+WAW = 9.81*data.WAW; %[N] 
+V = data.a*0.73; %[m/s]
+rho = 0.475448; %[kg/m^3]
+alt = 8839.2; %[m]
+a = data.a; %[m/s]
+dynvis = data.dynvis; %[Pa s]
+
 % Wing planform geometry 
 %                x    y     z   chord(m)    twist angle (deg) 
 AC.Wing.Geom = [0     0     0     c1         0;

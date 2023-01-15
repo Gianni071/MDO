@@ -208,7 +208,6 @@ AC.Aero.CL    = CL;          % lift coefficient - comment this line to run the c
 Res = Q3D_solver(AC);
 
 %%Plot of spanwise drag distribution for Cruise Conditions 
-
 Yst_original = [0.4375, 1.3125, 2.1875, 3.0625, 3.9375, 4.8125, 5.745, 6.735, 7.725, 8.715, 9.705, 10.695, 11.685, 12.675];
 Y_section_original = [0	1.88142857142857	3.76285714285714	5.64428571428571	7.52571428571429	9.40714285714286	11.2885714285714	13.1700000000000];
 Cdi_original = [0.0242 0.0212 0.0187 0.0162 0.0138 0.0113 0.0094 0.008 0.0067 0.0055 0.0045 0.0038 0.0036 0.0048];
@@ -223,7 +222,7 @@ hold on
 plot(Y_section_original/(xref(31)/2), Cd_wp_original)
 hold on 
 title('Spanwise Drag Distribution at Design Point')
-xlabel('Normalized Span [-]')
+xlabel('Normalized Semi-Span [-]')
 ylabel('Drag Coefficient [-]')
 legend('Final Induced Drag', 'Final Profile + Wave Drag', 'Initial Induced Drag', 'Initial Profile + Wave Drag')
 f = gcf;
@@ -238,7 +237,7 @@ plot([Res.Wing.Yst/(x(31)/2); 1], [Res.Wing.ccl; 0], 'b')
 hold on
 plot(Yst_original/(xref(31)/2), ccl_original, 'r')
 title('Spanwise lift distribution (c*C_l) at Design Point')
-xlabel('Normalized Span [-]')
+xlabel('Normalized Semi-Span [-]')
 ylabel('Lift Coefficient * Local Chord [m]')
 legend('Final', 'Initial')
 f = gcf;
@@ -252,11 +251,6 @@ rho = 0.475448; %[kg/m^3]
 alt = 8839.2; %[m]
 a = data.a; %[m/s]
 dynvis = data.dynvis; %[Pa s]
-
-%Flight Conditions 
-Re = ((S/b)*rho*V)/dynvis;
-M = V/a;
-CL = Wdes/(0.5*rho*V^2*S);
 
 %% Aerodynamic solver for Spanwise Lift Distribution in CRITICAL Conditions
 % Wing planform geometry 
@@ -284,24 +278,23 @@ MTOW = Wwing + Wfuel + WAW;   %[N]
 AC.Aero.V     = V;            % flight speed (m/s)
 AC.Aero.rho   = rho;          % air density  (kg/m3)
 AC.Aero.alt   = alt;             % flight altitude (m)
-AC.Aero.Re    = Re;        % reynolds number (based on mean aerodynamic chord)
-AC.Aero.M     = M;           % flight Mach number 
+AC.Aero.Re    = ((S/b)*rho*V)/dynvis;        % reynolds number (based on mean aerodynamic chord)
+AC.Aero.M     =  V/a;           % flight Mach number 
 n_max = 2.5;
 AC.Aero.CL    = (n_max*MTOW)/(0.5*AC.Aero.rho*AC.Aero.V^2*S);         % lift coefficient - comment this line to run the code for given alpha%
-%AC.Aero.Alpha = 2;             % angle of attack -  comment this line to run the code for given cl 
 
 %Run Q3D
 Res_crit = Q3D_solver(AC);
 
 %%Plot of spanwise lift distribution for CRITICAL Conditions 
 Yst_original = [0.4375, 1.3125, 2.1875, 3.0625, 3.9375, 4.8125, 5.745, 6.735, 7.725, 8.715, 9.705, 10.695, 11.685, 12.675, (xref(31)/2)];
-ccl_original_crit = [6.2418, 6.2496, 6.1745, 6.0448, 5.8714, 5.6615, 5.422, 5.1506, 4.846, 4.5051, 4.1197, 3.6697, 3.1035, 2.2556, 0];
+ccl_original_crit = [4.3738, 4.3649, 4.2954, 4.186, 4.0456, 3.88, 3.6966, 3.4964, 3.2752, 3.0308, 2.758, 2.4453, 2.0605, 1.5012, 0];
 
 plot([Res_crit.Wing.Yst/(x(31)/2); 1] , [Res_crit.Wing.ccl; 0], "b")
 hold on 
 plot(Yst_original/(xref(31)/2), ccl_original_crit, "r")
 title('Spanwise lift distribution (c*C_l) at Critical Conditions')
-xlabel('Normalized Span [-]')
+xlabel('Normalized Semi-Span [-]')
 ylabel('Lift Coefficient * Local Chord [m]')
 legend('Final', 'Initial')
 f = gcf;
