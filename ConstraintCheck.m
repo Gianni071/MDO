@@ -7,7 +7,8 @@ clc
 global data
 
 %Fuselage drag
-data.Dfus = 12307.5387; %[N]
+%data.Dfus = 12234.8; %[N]
+data.Dfus = 12307.5; 
 
 %Reference planform values
 data.x1 = 0; %[m]
@@ -56,16 +57,17 @@ data.eng_ypos2   =    0.50;    %[y/y3]
 CSTroot = readmatrix('RootRefCST.txt');
 CSTtip = readmatrix('TipRefCST.txt');
 CST = [CSTroot; CSTtip];
-
+%[12307.5387000000]
 xref = [CST; 4.128; 0.75; 0.522; 100; 100; 17.82; 26.34;  4774.7 ; 10553.734; 15];
 data.xref = xref;
 
 %% Load run
-matobj = matfile("run5.mat");
+matobj = matfile("FinalRun.mat");
 
 xnor = matobj.x;
+
 %xnor = xref./xref;
-%% Run full function
+%% Run full function-
 Loads(xnor,0);
 Structural();
 aerodynamics(xnor,1);
@@ -73,3 +75,7 @@ Performance(xnor);
 
 %% Load constraints
 [c,ceq] = constraints(xnor);
+
+%% Calculate CDaw (for postprocess)
+V = 0.51444*data.Vcr;
+CDaw = data.Dfus/(0.5*data.rho*V^2*data.S)

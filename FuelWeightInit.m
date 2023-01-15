@@ -7,7 +7,7 @@ global data
 %Script to calculate initial fuel weight
 
 %Fuselage drag
-data.Dfus = 12307.5387; %[N]
+data.Dfus = 12234.8; %[N]
 
 %Reference planform values
 data.x1 = 0; %[m]
@@ -22,7 +22,7 @@ data.Vaux = 1.174; %[m^3]
 
 %Change this!
 data.WAW = 26855.57; %[kg] ZFW - Wing weight 
-data.WSref = 545.72; %[kg/m^2]
+data.WSref = 560.61; %[kg/m^2]
 data.MTOWref = 42184; %[kg]
 
 %Flight Conditions and Atmospheric Conditions (Atmospheric conditions: https://www.digitaldutch.com/atmoscalc/)
