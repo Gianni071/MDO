@@ -55,7 +55,7 @@ ceq = [ceq1;ceq2;ceq3];
 %% Inequality 1 Wing Loading
 WTO = Wfuel+Wwing+WAW;
 
-WScalc = WTO/S
+WScalc = WTO/S;
 
 con1 = WScalc/WSref - 1;
 
@@ -139,8 +139,8 @@ Vout = Aout*(0.9*y3 - y2);
 Vtot = 0.93*2*(Vin+Vout);
 
 %Calculate constraint
-Vreq = Wfuelhat/rhofuel
-Vtot2 = Vaux + Vtot
+Vreq = Wfuelhat/rhofuel;
+Vtot2 = Vaux + Vtot;
 con2 = Vreq/Vtot2 - 1;
 
 c = [con1;con2];

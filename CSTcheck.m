@@ -11,7 +11,7 @@ Xcoords = t(1:length(t)/2,1);
 rootCST = readmatrix('RootRefCST.txt');
 
 %Calculate absolute 20% change
-abschange = 0.3*rootCST;
+abschange = 0.25*rootCST;
 
 lbroot = rootCST - abschange;
 ubroot = rootCST + abschange;
@@ -36,7 +36,7 @@ axis([0,1,-0.3,0.3])
 tipCST = readmatrix('TipRefCST.txt')
 
 %Calculate absolute 20% change
-abschangetip = 0.3*tipCST;
+abschangetip = 0.25*tipCST;
 
 lbtip = tipCST - abschangetip;
 ubtip = tipCST + abschangetip;
@@ -61,5 +61,5 @@ axis([0,1,-0.3,0.3])
 lb = [lbroot;lbtip]
 ub = [ubroot;ubtip]
 
-writematrix(lb,'CSTLowerBound2.txt')
-writematrix(ub,"CSTUpperBound2.txt")
+writematrix(lb,'CSTLowerBound.txt')
+writematrix(ub,"CSTUpperBound.txt")

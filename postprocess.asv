@@ -223,7 +223,7 @@ hold on
 plot(Y_section_original/(xref(31)/2), Cd_wp_original)
 hold on 
 title('Spanwise Drag Distribution at Design Point')
-xlabel('Normalized Semi-Span [-]')
+xlabel('Normalized Span [-]')
 ylabel('Drag Coefficient [-]')
 legend('Final Induced Drag', 'Final Profile + Wave Drag', 'Initial Induced Drag', 'Initial Profile + Wave Drag')
 f = gcf;
@@ -238,7 +238,7 @@ plot([Res.Wing.Yst/(x(31)/2); 1], [Res.Wing.ccl; 0], 'b')
 hold on
 plot(Yst_original/(xref(31)/2), ccl_original, 'r')
 title('Spanwise lift distribution (c*C_l) at Design Point')
-xlabel('Normalized Semi-Span [-]')
+xlabel('Normalized Span [-]')
 ylabel('Lift Coefficient * Local Chord [m]')
 legend('Final', 'Initial')
 f = gcf;
@@ -252,11 +252,7 @@ rho = 0.475448; %[kg/m^3]
 alt = 8839.2; %[m]
 a = data.a; %[m/s]
 dynvis = data.dynvis; %[Pa s]
-
-%Flight Conditions 
-Re = ((S/b)*rho*V)/dynvis;
-M = V/a;
-CL = Wdes/(0.5*rho*V^2*S);
+S 
 
 %% Aerodynamic solver for Spanwise Lift Distribution in CRITICAL Conditions
 % Wing planform geometry 
@@ -295,13 +291,13 @@ Res_crit = Q3D_solver(AC);
 
 %%Plot of spanwise lift distribution for CRITICAL Conditions 
 Yst_original = [0.4375, 1.3125, 2.1875, 3.0625, 3.9375, 4.8125, 5.745, 6.735, 7.725, 8.715, 9.705, 10.695, 11.685, 12.675, (xref(31)/2)];
-ccl_original_crit = [4.3738, 4.3649, 4.2954, 4.186, 4.0456, 3.88, 3.6966, 3.4964, 3.2752, 3.0308, 2.758, 2.4453, 2.0605, 1.5012, 0];
+ccl_original_crit = [6.2418, 6.2496, 6.1745, 6.0448, 5.8714, 5.6615, 5.422, 5.1506, 4.846, 4.5051, 4.1197, 3.6697, 3.1035, 2.2556, 0];
 
 plot([Res_crit.Wing.Yst/(x(31)/2); 1] , [Res_crit.Wing.ccl; 0], "b")
 hold on 
 plot(Yst_original/(xref(31)/2), ccl_original_crit, "r")
 title('Spanwise lift distribution (c*C_l) at Critical Conditions')
-xlabel('Normalized Semi-Span [-]')
+xlabel('Normalized Span [-]')
 ylabel('Lift Coefficient * Local Chord [m]')
 legend('Final', 'Initial')
 f = gcf;

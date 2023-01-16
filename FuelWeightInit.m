@@ -7,7 +7,7 @@ global data
 %Script to calculate initial fuel weight
 
 %Fuselage drag
-data.Dfus = 12234.8; %[N]
+data.Dfus = 12307.5387; %[N]
 
 %Reference planform values
 data.x1 = 0; %[m]
